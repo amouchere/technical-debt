@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Log Request Filter for Spring application | Technical Debt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Pour logguer les requêtes HTTP entrantes, Spring fournit des outils “out of the box”. 123456789101112@Beanpublic CommonsRequestLoggingFilter requestLoggingFilter() &amp;#123;    CommonsRequestLoggingFilte">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Log Request Filter for Spring application">
+<meta property="og:url" content="https://amouchere.github.io/technical-debt/2018/02/09/Log-Request-Filter-for-Spring-application/index.html">
+<meta property="og:site_name" content="Technical Debt">
+<meta property="og:description" content="Pour logguer les requêtes HTTP entrantes, Spring fournit des outils “out of the box”. 123456789101112@Beanpublic CommonsRequestLoggingFilter requestLoggingFilter() &amp;#123;    CommonsRequestLoggingFilte">
+<meta property="og:locale" content="fr_FR">
+<meta property="article:published_time" content="2018-02-09T15:25:39.000Z">
+<meta property="article:modified_time" content="2020-12-09T19:39:32.064Z">
+<meta property="article:author" content="Antoine BZH">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="SPRING">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/technical-debt/atom.xml" title="Technical Debt" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/technical-debt/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/technical-debt/" id="logo">Technical Debt</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/technical-debt/">Home</a>
+        
+          <a class="main-nav-link" href="/technical-debt/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/technical-debt/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amouchere.github.io/technical-debt"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Log-Request-Filter-for-Spring-application" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2018/02/09/Log-Request-Filter-for-Spring-application/" class="article-date">
+  <time datetime="2018-02-09T15:25:39.000Z" itemprop="datePublished">2018-02-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Log Request Filter for Spring application
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Pour logguer les requêtes HTTP entrantes, Spring fournit des outils “out of the box”.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CommonsRequestLoggingFilter <span class="title">requestLoggingFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    CommonsRequestLoggingFilter loggingFilter = <span class="keyword">new</span> CommonsRequestLoggingFilter();</span><br><span class="line">    loggingFilter.setIncludeClientInfo(<span class="keyword">true</span>);</span><br><span class="line">    loggingFilter.setIncludeQueryString(<span class="keyword">true</span>);</span><br><span class="line">    loggingFilter.setIncludePayload(<span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">return</span> loggingFilter;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Un peu de configuration logback aussi</span></span><br><span class="line">logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter=DEBUG.</span><br></pre></td></tr></table></figure>
+
+<p>Et les requetes entrantes sont logguées… mais tout ca n’est pas très personnalisable.  </p>
+<p>On peut aussi passer par un interceptor HTTP ou un filtre de requêtes.</p>
+<p>En voici une implémentation pour logguer les requêtes mais aussi les réponses. En bonus les paramètres de requêtes, le status HTTP, et pourquoi les header …</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.FilterChain;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletOutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponseWrapper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.io.output.TeeOutputStream;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.Ordered;</span><br><span class="line"><span class="keyword">import</span> org.springframework.mock.web.DelegatingServletOutputStream;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.filter.OncePerRequestFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.util.ContentCachingRequestWrapper;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.util.WebUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A filter which logs http request and response</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogRequestFilter</span> <span class="keyword">extends</span> <span class="title">OncePerRequestFilter</span> <span class="keyword">implements</span> <span class="title">Ordered</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getOrder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Ordered.LOWEST_PRECEDENCE - <span class="number">8</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doFilterInternal</span><span class="params">(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        <span class="keyword">final</span> PrintStream ps = <span class="keyword">new</span> PrintStream(baos);</span><br><span class="line"></span><br><span class="line">        ContentCachingRequestWrapper wrappedRequest = <span class="keyword">new</span> ContentCachingRequestWrapper(request);</span><br><span class="line">        <span class="keyword">final</span> ResponseWrapper wrappedResponse = <span class="keyword">new</span> ResponseWrapper(response, ps);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// pass through filter chain to do the actual request handling</span></span><br><span class="line">        filterChain.doFilter(wrappedRequest, wrappedResponse);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// body can only be read after the actual request handling was done!</span></span><br><span class="line">        logRequest(wrappedRequest);</span><br><span class="line">        logResponse(response, baos);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">logResponse</span><span class="params">(HttpServletResponse httpResp, ByteArrayOutputStream baos)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, Object&gt; trace = <span class="keyword">new</span> LinkedHashMap&lt;&gt;();</span><br><span class="line">        trace.put(<span class="string">&quot;status&quot;</span>, httpResp.getStatus());</span><br><span class="line">        trace.put(<span class="string">&quot;body&quot;</span>, baos.toString());</span><br><span class="line">        log.debug(String.format(<span class="string">&quot;Response trace &#x27;%s&#x27;&quot;</span>, trace));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">logRequest</span><span class="params">(ContentCachingRequestWrapper request)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, Object&gt; trace = <span class="keyword">new</span> LinkedHashMap&lt;&gt;();</span><br><span class="line">        trace.put(<span class="string">&quot;method&quot;</span>, request.getMethod());</span><br><span class="line">        trace.put(<span class="string">&quot;path&quot;</span>, request.getRequestURI());</span><br><span class="line">        trace.put(<span class="string">&quot;query&quot;</span>, request.getQueryString());</span><br><span class="line">        trace.put(<span class="string">&quot;body&quot;</span>, getBody(request));</span><br><span class="line">        log.debug(String.format(<span class="string">&quot;Request trace &#x27;%s&#x27;&quot;</span>, trace));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getBody</span><span class="params">(ContentCachingRequestWrapper request)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// wrap request to make sure we can read the body of the request (otherwise it will be consumed by the actual request handler)</span></span><br><span class="line">        ContentCachingRequestWrapper wrapper = WebUtils.getNativeRequest(request, ContentCachingRequestWrapper.class);</span><br><span class="line"></span><br><span class="line">        String body = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (wrapper != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">byte</span>[] buf = wrapper.getContentAsByteArray();</span><br><span class="line">            <span class="keyword">if</span> (buf.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    body = <span class="keyword">new</span> String(buf, <span class="number">0</span>, buf.length, wrapper.getCharacterEncoding());</span><br><span class="line">                &#125; <span class="keyword">catch</span> (UnsupportedEncodingException ex) &#123;</span><br><span class="line">                    body = <span class="string">&quot;[unknown]&quot;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> body;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Inner class to wrap HttpResponse in order to print response body</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ResponseWrapper</span> <span class="keyword">extends</span> <span class="title">HttpServletResponseWrapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> PrintStream ps;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Constructs a response adaptor wrapping the given response.</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> response The response to be wrapped</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@throws</span> IllegalArgumentException if the response is null</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        ResponseWrapper(<span class="keyword">final</span> HttpServletResponse response, <span class="keyword">final</span> PrintStream ps) &#123;</span><br><span class="line">            <span class="keyword">super</span>(response);</span><br><span class="line">            <span class="keyword">this</span>.ps = ps;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> ServletOutputStream <span class="title">getOutputStream</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> DelegatingServletOutputStream(<span class="keyword">new</span> TeeOutputStream(<span class="keyword">super</span>.getOutputStream(), ps));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> PrintWriter <span class="title">getWriter</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> DelegatingServletOutputStream(<span class="keyword">new</span> TeeOutputStream(<span class="keyword">super</span>.getOutputStream(), ps)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2018/02/09/Log-Request-Filter-for-Spring-application/" data-id="ckjrk35pg000bzku7bbt03k04" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/SPRING/" rel="tag">SPRING</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/technical-debt/2018/06/26/CXF-OneWay-method/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          CXF OneWay method
+        
+      </div>
+    </a>
+  
+  
+    <a href="/technical-debt/2018/02/09/HTTP-interceptor-With-SpringBoot/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">HTTP interceptor With SpringBoot</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Agilite/" rel="tag">Agilité</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/AssertJ/" rel="tag">AssertJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Brackets/" rel="tag">Brackets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Bricolage/" rel="tag">Bricolage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CRON/" rel="tag">CRON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CXF/" rel="tag">CXF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Coldfusion/" rel="tag">Coldfusion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/DHT22/" rel="tag">DHT22</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/DIY/" rel="tag">DIY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/ESP8266/" rel="tag">ESP8266</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Eclipse/" rel="tag">Eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Hacker/" rel="tag">Hacker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Http/" rel="tag">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/JAX-WS/" rel="tag">JAX-WS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Mockito/" rel="tag">Mockito</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/NodeJs/" rel="tag">NodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/RPM/" rel="tag">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SPRING/" rel="tag">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SSL/" rel="tag">SSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Scrum/" rel="tag">Scrum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Syno/" rel="tag">Syno</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/TU/" rel="tag">TU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/TrueCrypt/" rel="tag">TrueCrypt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/javascript/" rel="tag">javascript</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/technical-debt/tags/Agilite/" style="font-size: 10px;">Agilité</a> <a href="/technical-debt/tags/AssertJ/" style="font-size: 10px;">AssertJ</a> <a href="/technical-debt/tags/Brackets/" style="font-size: 10px;">Brackets</a> <a href="/technical-debt/tags/Bricolage/" style="font-size: 10px;">Bricolage</a> <a href="/technical-debt/tags/CRON/" style="font-size: 10px;">CRON</a> <a href="/technical-debt/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/technical-debt/tags/CXF/" style="font-size: 11.43px;">CXF</a> <a href="/technical-debt/tags/Coldfusion/" style="font-size: 10px;">Coldfusion</a> <a href="/technical-debt/tags/DHT22/" style="font-size: 10px;">DHT22</a> <a href="/technical-debt/tags/DIY/" style="font-size: 11.43px;">DIY</a> <a href="/technical-debt/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/technical-debt/tags/ESP8266/" style="font-size: 10px;">ESP8266</a> <a href="/technical-debt/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/technical-debt/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/technical-debt/tags/Hacker/" style="font-size: 10px;">Hacker</a> <a href="/technical-debt/tags/Http/" style="font-size: 10px;">Http</a> <a href="/technical-debt/tags/JAX-WS/" style="font-size: 15.71px;">JAX-WS</a> <a href="/technical-debt/tags/Java/" style="font-size: 20px;">Java</a> <a href="/technical-debt/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/technical-debt/tags/Linux/" style="font-size: 18.57px;">Linux</a> <a href="/technical-debt/tags/Maven/" style="font-size: 12.86px;">Maven</a> <a href="/technical-debt/tags/Mockito/" style="font-size: 11.43px;">Mockito</a> <a href="/technical-debt/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/technical-debt/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/technical-debt/tags/RPM/" style="font-size: 11.43px;">RPM</a> <a href="/technical-debt/tags/SPRING/" style="font-size: 14.29px;">SPRING</a> <a href="/technical-debt/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/technical-debt/tags/SSH/" style="font-size: 11.43px;">SSH</a> <a href="/technical-debt/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/technical-debt/tags/Scrum/" style="font-size: 10px;">Scrum</a> <a href="/technical-debt/tags/Shell/" style="font-size: 14.29px;">Shell</a> <a href="/technical-debt/tags/Spring/" style="font-size: 17.14px;">Spring</a> <a href="/technical-debt/tags/Syno/" style="font-size: 10px;">Syno</a> <a href="/technical-debt/tags/TU/" style="font-size: 14.29px;">TU</a> <a href="/technical-debt/tags/TrueCrypt/" style="font-size: 10px;">TrueCrypt</a> <a href="/technical-debt/tags/Windows/" style="font-size: 14.29px;">Windows</a> <a href="/technical-debt/tags/arduino/" style="font-size: 10px;">arduino</a> <a href="/technical-debt/tags/java/" style="font-size: 10px;">java</a> <a href="/technical-debt/tags/javascript/" style="font-size: 10px;">javascript</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2021/01/">janvier 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/12/">décembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/11/">novembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/12/">décembre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/10/">octobre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/06/">juin 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/02/">février 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/01/">janvier 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/09/">septembre 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/07/">juillet 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/05/">mai 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/02/">février 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/01/">janvier 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/12/">décembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/09/">septembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/08/">août 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/06/">juin 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/04/">avril 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/03/">mars 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/02/">février 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/01/">janvier 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/12/">décembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/09/">septembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/08/">août 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/05/">mai 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/04/">avril 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/03/">mars 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/02/">février 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/11/">novembre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/10/">octobre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/08/">août 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/01/">janvier 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/">I2C Screen sur ESP8266</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2020/12/09/commandeRPM/">RPM commandes</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2020/11/28/monitoringTemperatureESP8266/">Monitoring de température</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2018/12/24/diskusage/">Disk Usage</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2018/10/24/ssh-via-rebond/">ssh via rebond</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Antoine BZH<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/technical-debt/" class="mobile-nav-link">Home</a>
+  
+    <a href="/technical-debt/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/technical-debt/fancybox/jquery.fancybox.css">
+
+  
+<script src="/technical-debt/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/technical-debt/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

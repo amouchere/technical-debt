@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Technical Debt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Technical Debt">
+<meta property="og:url" content="https://amouchere.github.io/technical-debt/page/4/index.html">
+<meta property="og:site_name" content="Technical Debt">
+<meta property="og:locale" content="fr_FR">
+<meta property="article:author" content="Antoine BZH">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/technical-debt/atom.xml" title="Technical Debt" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/technical-debt/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/technical-debt/" id="logo">Technical Debt</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/technical-debt/">Home</a>
+        
+          <a class="main-nav-link" href="/technical-debt/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/technical-debt/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amouchere.github.io/technical-debt"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-combiner_plusieurs_repo_git_en_un_" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/12/10/combiner_plusieurs_repo_git_en_un_/" class="article-date">
+  <time datetime="2015-12-09T23:00:00.000Z" itemprop="datePublished">2015-12-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/12/10/combiner_plusieurs_repo_git_en_un_/">Combiner plusieurs repo Git en un</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>But : Pouvoir merger plusieurs repo GIT en un seul sans perdre l’historique d’aucun repo.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># Clone both repositories into the same directory and go into repo A:</span><br><span class="line"></span><br><span class="line">git clone A</span><br><span class="line">git clone B</span><br><span class="line">cd A</span><br><span class="line"></span><br><span class="line"># Add a remote called B that points to the repo B  (do git remote -v to view your remotes),</span><br><span class="line"># and fetch copies of all B’s branches:</span><br><span class="line"></span><br><span class="line">git remote add B ..&#x2F;B</span><br><span class="line">git fetch B</span><br><span class="line"></span><br><span class="line"># To view all B’s branches that we’ve just fetched,</span><br><span class="line"># do git branch -a. You should seeB&#x2F;master in the list.</span><br><span class="line"># Now, still in repo A, create a branch called B-master in repo A that tracks B&#x2F;master.</span><br><span class="line"></span><br><span class="line">git branch B-master B&#x2F;master</span><br><span class="line"></span><br><span class="line"># If you’re not already in the master branch, check it out, then merge B-master into A’s master.</span><br><span class="line"></span><br><span class="line">git merge B-master</span><br><span class="line"></span><br><span class="line"># Assuming you have no merge conflicts, you’re done!</span><br></pre></td></tr></table></figure>
+
+
+<p><a target="_blank" rel="noopener" href="http://blog.caplin.com/2013/09/18/merging-two-git-repositories/">source</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/12/10/combiner_plusieurs_repo_git_en_un_/" data-id="ckjrk35pt000pzku7glee14fc" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-lancer_une_appli_au_dmarrage_du_syno" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/09/24/lancer_une_appli_au_dmarrage_du_syno/" class="article-date">
+  <time datetime="2015-09-23T22:00:00.000Z" itemprop="datePublished">2015-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/09/24/lancer_une_appli_au_dmarrage_du_syno/">Lancer une appli au démarrage du Syno</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Placer le script sh dans  :<br>/usr/syno/etc/rc.d/</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"></span><br><span class="line">case $1 in</span><br><span class="line">start)</span><br><span class="line">         forever start /volume1/repo_git/chatNodeJs/app.js</span><br><span class="line">         exit 0</span><br><span class="line">         ;;</span><br><span class="line">stop)</span><br><span class="line">         forever stopall</span><br><span class="line">         exit 0</span><br><span class="line">         ;;</span><br><span class="line">restart)</span><br><span class="line">         clean_data</span><br><span class="line">         exit 0</span><br><span class="line">         ;;</span><br><span class="line">*)</span><br><span class="line">  /bin/echo “usage: $0 &#123; start | stop | restart &#125;” &gt;&amp;2</span><br><span class="line">    exit 1</span><br><span class="line">             ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/09/24/lancer_une_appli_au_dmarrage_du_syno/" data-id="ckjrk35qb001gzku7b319ht2m" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/NodeJs/" rel="tag">NodeJs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Syno/" rel="tag">Syno</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sql_jointure_schema" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/08/18/sql_jointure_schema/" class="article-date">
+  <time datetime="2015-08-17T22:00:00.000Z" itemprop="datePublished">2015-08-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/08/18/sql_jointure_schema/">SQL Jointure schéma</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="./sql_jointure.png" alt="sql jointure"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/08/18/sql_jointure_schema/" data-id="ckjrk35r2002kzku78y94a9c0" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/SQL/" rel="tag">SQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-maven_enforcer_plugin__the_loving_iron_fist_of_maven" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/05/27/maven_enforcer_plugin__the_loving_iron_fist_of_maven/" class="article-date">
+  <time datetime="2015-05-26T22:00:00.000Z" itemprop="datePublished">2015-05-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/05/27/maven_enforcer_plugin__the_loving_iron_fist_of_maven/">Maven Enforcer Plugin - The Loving Iron Fist of Maven™</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-enforcer-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>enforce-versions<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">goal</span>&gt;</span>enforce<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rules</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">bannedPlugins</span>&gt;</span></span><br><span class="line">            &lt;!– will only display a warning but does not fail the build. –&gt;</span><br><span class="line">            <span class="tag">&lt;<span class="name">level</span>&gt;</span>WARN<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>org.apache.maven.plugins:maven-surefire-plugin<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">message</span>&gt;</span>Please consider using the maven-invoker-plugin !<span class="tag">&lt;/<span class="name">message</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">bannedPlugins</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">requireMavenVersion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">requireMavenVersion</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">requireJavaVersion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">message</span>&gt;</span>1.7 java mini <span class="tag">&lt;/<span class="name">message</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">requireJavaVersion</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">enforceBytecodeVersion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">maxJdkVersion</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">maxJdkVersion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">message</span>&gt;</span>maxJdkVersion<span class="tag">&lt;/<span class="name">message</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">enforceBytecodeVersion</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">requireOS</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>windows<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">requireOS</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rules</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>extra-enforcer-rules<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-beta-3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Permet de faire échouer la compilation lors de :</p>
+<ul>
+<li>l’utilisation de certains plugins</li>
+<li>l’utilisation de certaines versions de Maven</li>
+<li>l’utilisation d’une version de java pour la compilation</li>
+<li>l’utilisation de librairies compilées dans une certaine version de java</li>
+<li>l’utilisation de certains OS pour la compilation</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.parleys.com/tutorial/quand-java-prend-de-la-vitesse-apache-maven-vous-garde-sur-les-rails">conférence parleys Devoxx2015</a><br><a target="_blank" rel="noopener" href="http://maven.apache.org/enforcer/maven-enforcer-plugin/">site du maven-enforcer-plugin</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/05/27/maven_enforcer_plugin__the_loving_iron_fist_of_maven/" data-id="ckjrk35qe001kzku70f9m4t3w" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Maven/" rel="tag">Maven</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-capter_les_traces_http_en_local" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/05/17/capter_les_traces_http_en_local/" class="article-date">
+  <time datetime="2015-05-16T22:00:00.000Z" itemprop="datePublished">2015-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/05/17/capter_les_traces_http_en_local/">Capter les traces http en local</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Wireshark ne peut pas capter les trames http qui ne sortent pas du localhost. RawCap si.<br><a target="_blank" rel="noopener" href="http://www.netresec.com/?page=RawCap">RawCap.exe</a></p>
+<p>Permet de créer un fichier dumpfile.pcap ouvrable avec Wireshark.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/05/17/capter_les_traces_http_en_local/" data-id="ckjrk35pp000nzku75lm23f49" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Http/" rel="tag">Http</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-migrer_de_eclipse__sublime_text_pour_coldfusion" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/05/17/migrer_de_eclipse__sublime_text_pour_coldfusion/" class="article-date">
+  <time datetime="2015-05-16T22:00:00.000Z" itemprop="datePublished">2015-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/05/17/migrer_de_eclipse__sublime_text_pour_coldfusion/">Migrer de Eclipse à Sublime Text pour coldfusion</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="./coldfusion-blog.png" alt="résultat"></p>
+<p><a target="_blank" rel="noopener" href="http://cflove.org/">cf love blog</a></p>
+<p>Switch to Sublime Text IDE for ColdFusion Developers.<br>I’m moving from Dreamweaver to Sublime Text.<br>Dreamweaver (DW) was my main IDE for almost a decade and it saved me good. Tag completion was excellent and I used bit of snippets too. It was reasonably stable and light, at least compared to Eclipse base IDEs. Search and Replace was excellent. Most impotently file management between remote/local servers were effortless. It works as well as ColdFusion Studio.</p>
+<p>Recently JavaScript began to change my workflow and that make me rethink about my use of IDE and I searched. Sublime Text is where my search ended.</p>
+<p><strong>Installation:</strong><br>Go to Sublime Text and install production version – it is version 2 as per today. Version 3 is in Beta and it is not going to work very well with CFM at this moment. Setup file is a 5MB file – compare that with DW or Eclipse.</p>
+<p><strong>ColdFusion:</strong><br>There is <a target="_blank" rel="noopener" href="https://github.com/SublimeText/ColdFusion">an official plugin</a> (or as Sublime Text like to say, a Project) for ColdFusion. Download it, unzip it and copy into your package folder (Preferences&gt; Browse Packages) in a new folder call “ColdFusion”. Wait, there is a much easier way to do this.</p>
+<p><strong>Installing Package Control:</strong><br>Package Control is a package (plugin) that speeds up the package installation. You must have that. Go to <a target="_blank" rel="noopener" href="https://sublime.wbond.net/installation">Sublime Text Package Control</a> web site and copy the installation code. It is something looks like this:</p>
+<img src="/technical-debt/2015/05/17/migrer_de_eclipse__sublime_text_pour_coldfusion/package_control.jpg" class="slug" title="Sublime Text Package Control">
+
+<p>Go to Sublime Text and press Ctrl+’ or click View&gt;Show Console. Paste the code into the Console window at the bottom of the editor and Enter, Restart sublime Text.</p>
+<p><strong>Installing Packages with Package Control:</strong><br>Press Ctrl+Shift+P or go to Tools &gt; Command Pallette and type “package install” and hit Enter.<br><img src="./package_control_1.jpg" alt="Sublime Text Package Control"></p>
+<p>That will bring up another window with list of available packages, search for ColdFusion (or any other package name you like) and Enter– now you have ColdFusion support. Package installation does not get any easier than this.</p>
+<p><img src="./package_control_2.jpg" alt="Sublime Text Package Control"></p>
+<p><strong>Language Support:</strong><br>Here is a something different form DW. Sublime Text choose code coloring and other functions base on the language and language is decided on the file extension. That means you get a different set of code coloring for .js and for .cfm files, snippets availability changes also. But if you want to change the language support for your file, for example, if you want to have full JavaScript support in your .cfm file, click on the bottom right corner of the sublime text and change the language.</p>
+<p><strong>Projects:</strong><br>Sublime Text do not maintain a project list like DW, instead it lets us save a “project file”. Go to Project&gt;Save Project As and save the file in any folder you like. You can add folders to your project using Project&gt;Add Folder to Project. To open a project, go to Project&gt;Open Project and open your project file from the location you saved it.</p>
+<p>Sublime Text let us open multiple projects in multiple windows at the same time.</p>
+<p><strong>File Explorer</strong><br>View &gt; Side Bar &gt; Show/Hide Side Bar bring up the File Explorer. Side Bar use single-click to expand folders and open files. Matter of fact, Sublime Text uses single-click whenever possible. That actually save fraction of a second compared to usual double clicks. It adds up.</p>
+<p>In Sublime Text, we can go a long way without having the side panel open. Ctrl+P let you find and open our files with a fuzzy search.<br><strong>Shortcuts Keys</strong><br>Sublime text use shortcuts as much as Americans use Coffee. Use them. They save significant amount of valuable time. Those shortcuts are often not multiple key press, but they are key sequences. For example, the shortcut key to toggle sidebar is Ctrl+k,b. Meaning, hold the Ctrl key and then type K and then B. To delete a whole line press and hold Ctrl+K and then K again.</p>
+<p><a target="_blank" rel="noopener" href="http://cflove.org/2013/09/switch-to-sublime-text-ide-for-coldfusion-developers.cfm">source</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/05/17/migrer_de_eclipse__sublime_text_pour_coldfusion/" data-id="ckjrk35qh001mzku71jafawcr" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Coldfusion/" rel="tag">Coldfusion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Eclipse/" rel="tag">Eclipse</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mockito_tips_reflectiontestutils_injecter_des_valeurs_constantes_dans_une_classe_de_test" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/04/28/mockito_tips_reflectiontestutils_injecter_des_valeurs_constantes_dans_une_classe_de_test/" class="article-date">
+  <time datetime="2015-04-27T22:00:00.000Z" itemprop="datePublished">2015-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/04/28/mockito_tips_reflectiontestutils_injecter_des_valeurs_constantes_dans_une_classe_de_test/">Mockito Tips: ReflectionTestUtils injecter des valeurs constantes dans une classe de test</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Pour injecter des valeurs dans des attributs de la classe à tester.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReflectionTestUtils.setField(<span class="keyword">this</span>.&lt;maClasseTestee&gt;, “maPropriété”, valeur);</span><br></pre></td></tr></table></figure>
+
+<p>Dépendance maven à ajouter:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.2.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/04/28/mockito_tips_reflectiontestutils_injecter_des_valeurs_constantes_dans_une_classe_de_test/" data-id="ckjrk35ql001uzku707ndh37p" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Mockito/" rel="tag">Mockito</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/TU/" rel="tag">TU</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mockito_tips_eviter_les_try_catch_dans_les_tu_grce_aux_catchexception_et_caughtexception" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/04/23/mockito_tips_eviter_les_try_catch_dans_les_tu_grce_aux_catchexception_et_caughtexception/" class="article-date">
+  <time datetime="2015-04-22T22:00:00.000Z" itemprop="datePublished">2015-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/04/23/mockito_tips_eviter_les_try_catch_dans_les_tu_grce_aux_catchexception_et_caughtexception/">Mockito Tips: Eviter les try catch dans les TU avec AssertJ</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Avec assertJ:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="comment">// GIVEN some preconditions</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// WHEN</span></span><br><span class="line">   Throwable thrown = catchThrowable(() -&gt; &#123; <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;boom!&quot;</span>); &#125;);</span><br><span class="line"></span><br><span class="line">   <span class="comment">// THEN</span></span><br><span class="line">   assertThat(thrown).isInstanceOf(Exception.class).hasMessageContaining(<span class="string">&quot;boom&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Dépendance maven à ajouter:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.assertj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>assertj-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/04/23/mockito_tips_eviter_les_try_catch_dans_les_tu_grce_aux_catchexception_et_caughtexception/" data-id="ckjrk35qj001rzku7cv5ias8a" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/AssertJ/" rel="tag">AssertJ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/TU/" rel="tag">TU</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ouverture_de_truecrypt__veracrypt" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/04/17/ouverture_de_truecrypt__veracrypt/" class="article-date">
+  <time datetime="2015-04-16T22:00:00.000Z" itemprop="datePublished">2015-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/04/17/ouverture_de_truecrypt__veracrypt/">Ouverture de TrueCrypt / VeraCrypt</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># TrueCrypt</span></span><br><span class="line">SET TC_PATH=“C:\Program Files\TrueCrypt”</span><br><span class="line">SET DRIVE_LETTER=M</span><br><span class="line">SET TC_VOLUME_NAME=truecrypt\myTrueCryptFile.tc</span><br><span class="line">SET TC_VOLUME_PWD=****</span><br><span class="line"></span><br><span class="line">%TC_PATH%\TrueCrypt.exe /l%DRIVE_LETTER% /v %TC_VOLUME_NAME% /p %TC_VOLUME_PWD% /q /b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># VeraCrypt</span></span><br><span class="line">SET HC_PATH=“C:\Program Files\VeraCrypt”</span><br><span class="line">SET DRIVE_LETTER=I</span><br><span class="line">SET HC_VOLUME_NAME=truecrypt\myVeraCryptFile.hc</span><br><span class="line">SET HC_VOLUME_PWD=****</span><br><span class="line"></span><br><span class="line">%HC_PATH%\VeraCrypt.exe /l%DRIVE_LETTER% /v %HC_VOLUME_NAME% /p %HC_VOLUME_PWD% /q /b</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/04/17/ouverture_de_truecrypt__veracrypt/" data-id="ckjrk35qs0028zku756ae3428" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/TrueCrypt/" rel="tag">TrueCrypt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Windows/" rel="tag">Windows</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-insrer_du_cdata_dans_un_flux_soap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/04/03/insrer_du_cdata_dans_un_flux_soap/" class="article-date">
+  <time datetime="2015-04-02T22:00:00.000Z" itemprop="datePublished">2015-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/04/03/insrer_du_cdata_dans_un_flux_soap/">Insérer du CDATA dans un flux SOAP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(<span class="keyword">final</span> Message message)</span> </span>&#123;</span><br><span class="line">        message.put(“disable.outputstream.optimization”, Boolean.TRUE);</span><br><span class="line">        <span class="keyword">final</span> XMLStreamWriter writer = StaxUtils.createXMLStreamWriter(message.getContent(OutputStream.class));</span><br><span class="line">        message.setContent(XMLStreamWriter.class, <span class="keyword">new</span> CDataXMLStreamWriter(writer));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.amouchere.impl.soap.interceptor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.xml.stream.XMLStreamException;</span><br><span class="line"><span class="keyword">import</span> javax.xml.stream.XMLStreamWriter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.cxf.staxutils.DelegatingXMLStreamWriter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  This StreamWriter is used to put CDATA tag into xml when the xml node is “myTag”</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CDataXMLStreamWriter</span> <span class="keyword">extends</span> <span class="title">DelegatingXMLStreamWriter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String TAG_NAME = “myTag”;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String currentElementName;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CDataXMLStreamWriter</span><span class="params">(<span class="keyword">final</span> XMLStreamWriter del)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(del);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /</span><br><span class="line"></span><br><span class="line">      <span class="meta">@return</span> <span class="function"><span class="keyword">true</span> <span class="keyword">if</span> the current element is the right <span class="title">one</span> <span class="params">(CDATA)</span>.</span></span><br><span class="line"><span class="function">     */</span></span><br><span class="line"><span class="function">    <span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkIfCDATAneededForCurrentElement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (TAG_NAME.equals(<span class="keyword">this</span>.currentElementName)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeCharacters</span><span class="params">(<span class="keyword">final</span> String text)</span> <span class="keyword">throws</span> XMLStreamException </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">boolean</span> useCData = <span class="keyword">this</span>.checkIfCDATAneededForCurrentElement();</span><br><span class="line">        <span class="keyword">if</span> (useCData) &#123;</span><br><span class="line">            <span class="keyword">super</span>.writeCData(text);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">super</span>.writeCharacters(text);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeStartElement</span><span class="params">(<span class="keyword">final</span> String prefix, <span class="keyword">final</span> String local, <span class="keyword">final</span> String uri)</span> <span class="keyword">throws</span> XMLStreamException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.currentElementName = local;</span><br><span class="line">        <span class="keyword">super</span>.writeStartElement(prefix, local, uri);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/04/03/insrer_du_cdata_dans_un_flux_soap/" data-id="ckjrk35q80019zku70hwze0s7" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/JAX-WS/" rel="tag">JAX-WS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/technical-debt/page/3/">&lt;&lt; Précédent</a><a class="page-number" href="/technical-debt/">1</a><a class="page-number" href="/technical-debt/page/2/">2</a><a class="page-number" href="/technical-debt/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/technical-debt/page/5/">5</a><a class="extend next" rel="next" href="/technical-debt/page/5/">Suivant &gt;&gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Agilite/" rel="tag">Agilité</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/AssertJ/" rel="tag">AssertJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Brackets/" rel="tag">Brackets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Bricolage/" rel="tag">Bricolage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CRON/" rel="tag">CRON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CXF/" rel="tag">CXF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Coldfusion/" rel="tag">Coldfusion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/DHT22/" rel="tag">DHT22</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/DIY/" rel="tag">DIY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/ESP8266/" rel="tag">ESP8266</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Eclipse/" rel="tag">Eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Hacker/" rel="tag">Hacker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Http/" rel="tag">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/JAX-WS/" rel="tag">JAX-WS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Mockito/" rel="tag">Mockito</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/NodeJs/" rel="tag">NodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/RPM/" rel="tag">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SPRING/" rel="tag">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SSL/" rel="tag">SSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Scrum/" rel="tag">Scrum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Syno/" rel="tag">Syno</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/TU/" rel="tag">TU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/TrueCrypt/" rel="tag">TrueCrypt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/javascript/" rel="tag">javascript</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/technical-debt/tags/Agilite/" style="font-size: 10px;">Agilité</a> <a href="/technical-debt/tags/AssertJ/" style="font-size: 10px;">AssertJ</a> <a href="/technical-debt/tags/Brackets/" style="font-size: 10px;">Brackets</a> <a href="/technical-debt/tags/Bricolage/" style="font-size: 10px;">Bricolage</a> <a href="/technical-debt/tags/CRON/" style="font-size: 10px;">CRON</a> <a href="/technical-debt/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/technical-debt/tags/CXF/" style="font-size: 11.43px;">CXF</a> <a href="/technical-debt/tags/Coldfusion/" style="font-size: 10px;">Coldfusion</a> <a href="/technical-debt/tags/DHT22/" style="font-size: 10px;">DHT22</a> <a href="/technical-debt/tags/DIY/" style="font-size: 11.43px;">DIY</a> <a href="/technical-debt/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/technical-debt/tags/ESP8266/" style="font-size: 10px;">ESP8266</a> <a href="/technical-debt/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/technical-debt/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/technical-debt/tags/Hacker/" style="font-size: 10px;">Hacker</a> <a href="/technical-debt/tags/Http/" style="font-size: 10px;">Http</a> <a href="/technical-debt/tags/JAX-WS/" style="font-size: 15.71px;">JAX-WS</a> <a href="/technical-debt/tags/Java/" style="font-size: 20px;">Java</a> <a href="/technical-debt/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/technical-debt/tags/Linux/" style="font-size: 18.57px;">Linux</a> <a href="/technical-debt/tags/Maven/" style="font-size: 12.86px;">Maven</a> <a href="/technical-debt/tags/Mockito/" style="font-size: 11.43px;">Mockito</a> <a href="/technical-debt/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/technical-debt/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/technical-debt/tags/RPM/" style="font-size: 11.43px;">RPM</a> <a href="/technical-debt/tags/SPRING/" style="font-size: 14.29px;">SPRING</a> <a href="/technical-debt/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/technical-debt/tags/SSH/" style="font-size: 11.43px;">SSH</a> <a href="/technical-debt/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/technical-debt/tags/Scrum/" style="font-size: 10px;">Scrum</a> <a href="/technical-debt/tags/Shell/" style="font-size: 14.29px;">Shell</a> <a href="/technical-debt/tags/Spring/" style="font-size: 17.14px;">Spring</a> <a href="/technical-debt/tags/Syno/" style="font-size: 10px;">Syno</a> <a href="/technical-debt/tags/TU/" style="font-size: 14.29px;">TU</a> <a href="/technical-debt/tags/TrueCrypt/" style="font-size: 10px;">TrueCrypt</a> <a href="/technical-debt/tags/Windows/" style="font-size: 14.29px;">Windows</a> <a href="/technical-debt/tags/arduino/" style="font-size: 10px;">arduino</a> <a href="/technical-debt/tags/java/" style="font-size: 10px;">java</a> <a href="/technical-debt/tags/javascript/" style="font-size: 10px;">javascript</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2021/01/">janvier 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/12/">décembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/11/">novembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/12/">décembre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/10/">octobre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/06/">juin 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/02/">février 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/01/">janvier 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/09/">septembre 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/07/">juillet 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/05/">mai 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/02/">février 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/01/">janvier 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/12/">décembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/09/">septembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/08/">août 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/06/">juin 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/04/">avril 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/03/">mars 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/02/">février 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/01/">janvier 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/12/">décembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/09/">septembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/08/">août 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/05/">mai 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/04/">avril 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/03/">mars 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/02/">février 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/11/">novembre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/10/">octobre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/08/">août 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/01/">janvier 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/">I2C Screen sur ESP8266</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2020/12/09/commandeRPM/">RPM commandes</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2020/11/28/monitoringTemperatureESP8266/">Monitoring de température</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2018/12/24/diskusage/">Disk Usage</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2018/10/24/ssh-via-rebond/">ssh via rebond</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Antoine BZH<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/technical-debt/" class="mobile-nav-link">Home</a>
+  
+    <a href="/technical-debt/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/technical-debt/fancybox/jquery.fancybox.css">
+
+  
+<script src="/technical-debt/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/technical-debt/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>I2C Screen sur ESP8266 | Technical Debt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Le but du tutoriel est de d’afficher des données sur un écran I2C LCD avec un ESP32 (Compatible ESP8266). Les composants L’écran LCD utilisé est un 20X4 mais il existe aussi des afficheurs plus petit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I2C Screen sur ESP8266">
+<meta property="og:url" content="https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/index.html">
+<meta property="og:site_name" content="Technical Debt">
+<meta property="og:description" content="Le but du tutoriel est de d’afficher des données sur un écran I2C LCD avec un ESP32 (Compatible ESP8266). Les composants L’écran LCD utilisé est un 20X4 mais il existe aussi des afficheurs plus petit">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/lcd.jpg">
+<meta property="og:image" content="https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/lcd_2.jpg">
+<meta property="og:image" content="https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/esp8266.jpg">
+<meta property="og:image" content="https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/circuit_schema.png">
+<meta property="og:image" content="https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/Arduino_IDE.PNG">
+<meta property="og:image" content="https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/demo.jpg">
+<meta property="article:published_time" content="2021-01-08T20:12:36.000Z">
+<meta property="article:modified_time" content="2021-01-10T14:32:51.396Z">
+<meta property="article:author" content="Antoine BZH">
+<meta property="article:tag" content="arduino">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/lcd.jpg">
+  
+    <link rel="alternate" href="/technical-debt/atom.xml" title="Technical Debt" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/technical-debt/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/technical-debt/" id="logo">Technical Debt</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/technical-debt/">Home</a>
+        
+          <a class="main-nav-link" href="/technical-debt/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/technical-debt/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amouchere.github.io/technical-debt"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-I2C-Screen-sur-ESP8266" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/" class="article-date">
+  <time datetime="2021-01-08T20:12:36.000Z" itemprop="datePublished">2021-01-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      I2C Screen sur ESP8266
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Le but du tutoriel est de d’afficher des données sur un écran I2C LCD avec un ESP32 (Compatible ESP8266).</p>
+<h1 id="Les-composants"><a href="#Les-composants" class="headerlink" title="Les composants"></a>Les composants</h1><ul>
+<li>L’écran LCD utilisé est un 20X4 mais il existe aussi des afficheurs plus petit au format 16x2. Un potentiomètre à l’arrière de l’écran permet de regler la luminosité de l’écran. </li>
+</ul>
+<p><img src="./lcd.jpg" alt="LCD"><br><img src="./lcd_2.jpg" alt="LCD Vue arrière"></p>
+<ul>
+<li>L’ESP est un ESP8266.</li>
+</ul>
+<p><img src="./esp8266.jpg" alt="ESP8266"></p>
+<ul>
+<li>Des cables femelle-femelle ou bien mâle-femelle et une plaque de montage. </li>
+</ul>
+<h1 id="Le-montage"><a href="#Le-montage" class="headerlink" title="Le montage"></a>Le montage</h1><p>L’écran utilisant une communication de type I2C le montage est assez simple. </p>
+<p>4 Pins côtés écrans à branché sur l’esp: </p>
+<ul>
+<li>GND -&gt; Sur une pin Gnd de l’arduino</li>
+<li>VCC -&gt; Pour alimenter l’écran, à brancher sur la pin VIN. (Sur l’esp8266, j’ai du faire le branchement sur la pin 3V)</li>
+<li>SDA -&gt; GPIO 4 (pin D2)</li>
+<li>SCL -&gt; GPIO 5 (pin D1)</li>
+</ul>
+<p><img src="./circuit_schema.png" alt="résultat"></p>
+<h1 id="Le-code"><a href="#Le-code" class="headerlink" title="Le code"></a>Le code</h1><h2 id="Adresse-du-LCD"><a href="#Adresse-du-LCD" class="headerlink" title="Adresse du LCD"></a>Adresse du LCD</h2><p>Pour communiquer avec l’écran LCD, il faut retrouver l’adresse de l’écran et le fournir ensuite à l’esp.<br>Le code ci-dessous permet de retrouver cette adresse qui s’affichera dans le moniteur série. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Wire.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Wire.begin();</span><br><span class="line">  Serial.begin(<span class="number">115200</span>);</span><br><span class="line">  Serial.println(<span class="string">&quot;\nI2C Scanner&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  byte error, address;</span><br><span class="line">  <span class="keyword">int</span> nDevices;</span><br><span class="line">  Serial.println(<span class="string">&quot;Scanning...&quot;</span>);</span><br><span class="line">  nDevices = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(address = <span class="number">1</span>; address &lt; <span class="number">127</span>; address++ ) &#123;</span><br><span class="line">    Wire.beginTransmission(address);</span><br><span class="line">    error = Wire.endTransmission();</span><br><span class="line">    <span class="keyword">if</span> (error == <span class="number">0</span>) &#123;</span><br><span class="line">      Serial.print(<span class="string">&quot;I2C device found at address 0x&quot;</span>);</span><br><span class="line">      <span class="keyword">if</span> (address&lt;<span class="number">16</span>) &#123;</span><br><span class="line">        Serial.print(<span class="string">&quot;0&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      Serial.println(address,HEX);</span><br><span class="line">      nDevices++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (error==<span class="number">4</span>) &#123;</span><br><span class="line">      Serial.print(<span class="string">&quot;Unknow error at address 0x&quot;</span>);</span><br><span class="line">      <span class="keyword">if</span> (address&lt;<span class="number">16</span>) &#123;</span><br><span class="line">        Serial.print(<span class="string">&quot;0&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      Serial.println(address,HEX);</span><br><span class="line">    &#125;    </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (nDevices == <span class="number">0</span>) &#123;</span><br><span class="line">    Serial.println(<span class="string">&quot;No I2C devices found\n&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    Serial.println(<span class="string">&quot;done\n&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  delay(<span class="number">5000</span>);          </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="LiquidCrystal-I2C"><a href="#LiquidCrystal-I2C" class="headerlink" title="LiquidCrystal_I2C"></a>LiquidCrystal_I2C</h2><p>La librairie LiquidCrystal_I2C permet de piloter facilement les écrans LCD I2C. </p>
+<ul>
+<li>Télécharger la librairie <a target="_blank" rel="noopener" href="https://github.com/marcoschwartz/LiquidCrystal_I2C/archive/master.zip">LiquidCrystal_I2C</a></li>
+<li>Unzip et renommer LiquidCrystal_I2C-master en LiquidCrystal_I2C.</li>
+<li>Déplacer le répertoire LiquidCrystal_I2C dans le répertoire des librairies de l’IDE Arduino.</li>
+<li>Relancer l’IDE</li>
+</ul>
+<p><img src="./Arduino_IDE.PNG" alt="Ajout de la librairie LiquidCrystal_I2C"></p>
+<h1 id="Affichage-de-texte"><a href="#Affichage-de-texte" class="headerlink" title="Affichage de texte"></a>Affichage de texte</h1><p>Le code ci-dessous permet d’initialiser la librairie (taille et adresse de l’écran puis d’afficher un texte basique à l’écran)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;LiquidCrystal_I2C.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// définir la taille de l&#x27;écran (16x2 20x4 ..) </span></span><br><span class="line"><span class="keyword">int</span> lcdColumns = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">int</span> lcdRows = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">int</span> adress = <span class="number">0x27</span> ;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Fournir à la librairie la taille de l&#x27;écran et son adresse. </span></span><br><span class="line"><span class="function">LiquidCrystal_I2C <span class="title">lcd</span><span class="params">(adress, lcdColumns, lcdRows)</span></span>;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</span><br><span class="line">  Serial.begin(<span class="number">115200</span>);</span><br><span class="line">  Serial.println(<span class="string">&quot;\nI2C LCD Initialisation&quot;</span>);</span><br><span class="line">  <span class="comment">// Initialiser l&#x27;afficheur</span></span><br><span class="line">  lcd.init(); </span><br><span class="line">  <span class="comment">//  Allumer l&#x27;afficheur                  </span></span><br><span class="line">  lcd.backlight();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">// placer le curseur sur la première ligne et première colonne. </span></span><br><span class="line">  lcd.setCursor(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  lcd.print(<span class="string">&quot;Hello, World&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>D’autres fonctions sont fournies par la librairie. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vider l&#x27;afficheur</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Eteindre l&#x27;afficheur</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">noBacklight</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  Allumer l&#x27;afficheur                  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backlight</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Et d&#x27;autres ...</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">home</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">noDisplay</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">noBlink</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">blink</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">noCursor</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cursor</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">scrollDisplayLeft</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">scrollDisplayRight</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printLeft</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printRight</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">leftToRight</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rightToLeft</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shiftIncrement</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shiftDecrement</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">noBacklight</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backlight</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">autoscroll</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">noAutoscroll</span><span class="params">()</span></span>; </span><br></pre></td></tr></table></figure>
+
+<p>Il est aussi possible d’afficher des caractères customisables. </p>
+<p>Il faut retranscrire le caractère en un tableau de bytes. Un outils en ligne existe pour les générer sur ce <a target="_blank" rel="noopener" href="https://omerk.github.io/lcdchargen/">site</a>.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">byte heart[<span class="number">8</span>] = &#123;</span><br><span class="line">  <span class="number">0b00000</span>,</span><br><span class="line">  <span class="number">0b01010</span>,</span><br><span class="line">  <span class="number">0b11111</span>,</span><br><span class="line">  <span class="number">0b11111</span>,</span><br><span class="line">  <span class="number">0b11111</span>,</span><br><span class="line">  <span class="number">0b01110</span>,</span><br><span class="line">  <span class="number">0b00100</span>,</span><br><span class="line">  <span class="number">0b00000</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// Création du caractère à partir du tableau de bytes. Et affectation de ce caractère à la variable 0.</span></span><br><span class="line">  lcd.createChar(<span class="number">0</span>, heart);</span><br><span class="line">  </span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span>&#123;</span><br><span class="line"> ....</span><br><span class="line"> <span class="comment">// Affichage du caractères en utilsant la variable 0</span></span><br><span class="line">  lcd.write(<span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>et voilà : </p>
+<p><img src="./demo.jpg" alt="résultat"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/" data-id="ckjrk35pc0006zku7hfbjgo8b" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/arduino/" rel="tag">arduino</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/technical-debt/2020/12/09/commandeRPM/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">RPM commandes</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Agilite/" rel="tag">Agilité</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/AssertJ/" rel="tag">AssertJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Brackets/" rel="tag">Brackets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Bricolage/" rel="tag">Bricolage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CRON/" rel="tag">CRON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CXF/" rel="tag">CXF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Coldfusion/" rel="tag">Coldfusion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/DHT22/" rel="tag">DHT22</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/DIY/" rel="tag">DIY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/ESP8266/" rel="tag">ESP8266</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Eclipse/" rel="tag">Eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Hacker/" rel="tag">Hacker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Http/" rel="tag">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/JAX-WS/" rel="tag">JAX-WS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Mockito/" rel="tag">Mockito</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/NodeJs/" rel="tag">NodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/RPM/" rel="tag">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SPRING/" rel="tag">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SSL/" rel="tag">SSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Scrum/" rel="tag">Scrum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Syno/" rel="tag">Syno</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/TU/" rel="tag">TU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/TrueCrypt/" rel="tag">TrueCrypt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/javascript/" rel="tag">javascript</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/technical-debt/tags/Agilite/" style="font-size: 10px;">Agilité</a> <a href="/technical-debt/tags/AssertJ/" style="font-size: 10px;">AssertJ</a> <a href="/technical-debt/tags/Brackets/" style="font-size: 10px;">Brackets</a> <a href="/technical-debt/tags/Bricolage/" style="font-size: 10px;">Bricolage</a> <a href="/technical-debt/tags/CRON/" style="font-size: 10px;">CRON</a> <a href="/technical-debt/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/technical-debt/tags/CXF/" style="font-size: 11.43px;">CXF</a> <a href="/technical-debt/tags/Coldfusion/" style="font-size: 10px;">Coldfusion</a> <a href="/technical-debt/tags/DHT22/" style="font-size: 10px;">DHT22</a> <a href="/technical-debt/tags/DIY/" style="font-size: 11.43px;">DIY</a> <a href="/technical-debt/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/technical-debt/tags/ESP8266/" style="font-size: 10px;">ESP8266</a> <a href="/technical-debt/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/technical-debt/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/technical-debt/tags/Hacker/" style="font-size: 10px;">Hacker</a> <a href="/technical-debt/tags/Http/" style="font-size: 10px;">Http</a> <a href="/technical-debt/tags/JAX-WS/" style="font-size: 15.71px;">JAX-WS</a> <a href="/technical-debt/tags/Java/" style="font-size: 20px;">Java</a> <a href="/technical-debt/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/technical-debt/tags/Linux/" style="font-size: 18.57px;">Linux</a> <a href="/technical-debt/tags/Maven/" style="font-size: 12.86px;">Maven</a> <a href="/technical-debt/tags/Mockito/" style="font-size: 11.43px;">Mockito</a> <a href="/technical-debt/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/technical-debt/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/technical-debt/tags/RPM/" style="font-size: 11.43px;">RPM</a> <a href="/technical-debt/tags/SPRING/" style="font-size: 14.29px;">SPRING</a> <a href="/technical-debt/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/technical-debt/tags/SSH/" style="font-size: 11.43px;">SSH</a> <a href="/technical-debt/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/technical-debt/tags/Scrum/" style="font-size: 10px;">Scrum</a> <a href="/technical-debt/tags/Shell/" style="font-size: 14.29px;">Shell</a> <a href="/technical-debt/tags/Spring/" style="font-size: 17.14px;">Spring</a> <a href="/technical-debt/tags/Syno/" style="font-size: 10px;">Syno</a> <a href="/technical-debt/tags/TU/" style="font-size: 14.29px;">TU</a> <a href="/technical-debt/tags/TrueCrypt/" style="font-size: 10px;">TrueCrypt</a> <a href="/technical-debt/tags/Windows/" style="font-size: 14.29px;">Windows</a> <a href="/technical-debt/tags/arduino/" style="font-size: 10px;">arduino</a> <a href="/technical-debt/tags/java/" style="font-size: 10px;">java</a> <a href="/technical-debt/tags/javascript/" style="font-size: 10px;">javascript</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2021/01/">janvier 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/12/">décembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/11/">novembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/12/">décembre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/10/">octobre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/06/">juin 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/02/">février 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/01/">janvier 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/09/">septembre 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/07/">juillet 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/05/">mai 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/02/">février 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/01/">janvier 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/12/">décembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/09/">septembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/08/">août 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/06/">juin 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/04/">avril 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/03/">mars 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/02/">février 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/01/">janvier 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/12/">décembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/09/">septembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/08/">août 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/05/">mai 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/04/">avril 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/03/">mars 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/02/">février 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/11/">novembre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/10/">octobre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/08/">août 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/01/">janvier 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/">I2C Screen sur ESP8266</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2020/12/09/commandeRPM/">RPM commandes</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2020/11/28/monitoringTemperatureESP8266/">Monitoring de température</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2018/12/24/diskusage/">Disk Usage</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2018/10/24/ssh-via-rebond/">ssh via rebond</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Antoine BZH<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/technical-debt/" class="mobile-nav-link">Home</a>
+  
+    <a href="/technical-debt/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/technical-debt/fancybox/jquery.fancybox.css">
+
+  
+<script src="/technical-debt/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/technical-debt/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

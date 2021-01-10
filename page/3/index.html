@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Technical Debt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Technical Debt">
+<meta property="og:url" content="https://amouchere.github.io/technical-debt/page/3/index.html">
+<meta property="og:site_name" content="Technical Debt">
+<meta property="og:locale" content="fr_FR">
+<meta property="article:author" content="Antoine BZH">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/technical-debt/atom.xml" title="Technical Debt" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/technical-debt/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/technical-debt/" id="logo">Technical Debt</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/technical-debt/">Home</a>
+        
+          <a class="main-nav-link" href="/technical-debt/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/technical-debt/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amouchere.github.io/technical-debt"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-creation-css-classes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2016/08/24/creation-css-classes/" class="article-date">
+  <time datetime="2016-08-24T19:18:36.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2016/08/24/creation-css-classes/">Création de classes CSS en javascript</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Pour créer une classe CSS dynamiquement, il faut passer par la modification du DOM.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nouvel element de style</span></span><br><span class="line"><span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">&#x27;style&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// définition du type</span></span><br><span class="line">style.type = <span class="string">&#x27;text/css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// création d&#x27;une ou plusieurs classes CSS</span></span><br><span class="line">style.innerHTML = <span class="string">&#x27;.myCssClass &#123; color: #F00; &#125;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Attacher l&#x27;élément au head de la page</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;head&#x27;</span>)[<span class="number">0</span>].appendChild(style);</span><br><span class="line"></span><br><span class="line"><span class="comment">// La classe myCssClass est dispo !</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2016/08/24/creation-css-classes/" data-id="ckjrk35py000uzku78j3f8ww2" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux_dev_env" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2016/06/10/linux_dev_env/" class="article-date">
+  <time datetime="2016-06-09T22:00:00.000Z" itemprop="datePublished">2016-06-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2016/06/10/linux_dev_env/">Apt-get configuration</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Apt-get Configuration</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &#x2F;etc&#x2F;apt&#x2F;apt.conf.d&#x2F;config.conf</span><br><span class="line"></span><br><span class="line">Acquire::http::proxy &quot;http:&#x2F;&#x2F;user:password@proxy-url:3128&#x2F;&quot;;</span><br><span class="line">Acquire::https::proxy &quot;http:&#x2F;&#x2F;user:password@proxy-url:3128&#x2F;&quot;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2016/06/10/linux_dev_env/" data-id="ckjrk35qc001izku791bj8e1c" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-modifier_le_temps_de_validiter_du_password_du_sudo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2016/04/22/modifier_le_temps_de_validiter_du_password_du_sudo/" class="article-date">
+  <time datetime="2016-04-21T22:00:00.000Z" itemprop="datePublished">2016-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2016/04/22/modifier_le_temps_de_validiter_du_password_du_sudo/">Modifier le temps de validiter du password du SUDO</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dans un terminal, lancer la commande :</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo visudo</span><br></pre></td></tr></table></figure>
+
+<p>Chercher la ligne:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Defaults        env_reset</span><br></pre></td></tr></table></figure>
+
+<p>Et modifier cette ligne en:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Defaults        env_reset,timestamp_timeout=30</span><br></pre></td></tr></table></figure>
+
+<p><strong>30</strong> est en minute le temps de validité du mot de passe lors d’un sudo.<br><strong>0</strong> permet de demander un mot de passe systématiquement.<br><strong>-1</strong> permet de ne jamais demander de mot de passe.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2016/04/22/modifier_le_temps_de_validiter_du_password_du_sudo/" data-id="ckjrk35qm001wzku7egzdeq6q" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Shell/" rel="tag">Shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-service_ubuntu_jar" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2016/04/22/service_ubuntu_jar/" class="article-date">
+  <time datetime="2016-04-21T22:00:00.000Z" itemprop="datePublished">2016-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2016/04/22/service_ubuntu_jar/">Service ubuntu Jar</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Créer</strong> dans /etc/init.d/ un fichier planningmenuserver</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line">### BEGIN INIT INFO</span><br><span class="line"># Provides:         planningmenuserver</span><br><span class="line"># Required-Start:</span><br><span class="line"># Required-Stop:</span><br><span class="line"># Default-Start:     2 3 4 5</span><br><span class="line"># Default-Stop:      0 1 6</span><br><span class="line"># Short-Description: planningmenuserver</span><br><span class="line"># Description:       planningmenuserver backend</span><br><span class="line">### END INIT INFO</span><br><span class="line"></span><br><span class="line">SERVICE_NAME&#x3D;planningmenuserver</span><br><span class="line">PATH_TO_JAR&#x3D;&#x2F;home&#x2F;pi&#x2F;apps&#x2F;planningmenuserver&#x2F;planningrepas-1.0-SNAPSHOT.jar</span><br><span class="line">PID_PATH_NAME&#x3D;&#x2F;tmp&#x2F;planningmenuserver-pid</span><br><span class="line">case $1 in</span><br><span class="line">    start)</span><br><span class="line">        echo “Starting $SERVICE_NAME …”</span><br><span class="line">        if [ ! -f $PID_PATH_NAME ]; then</span><br><span class="line">            nohup java -jar $PATH_TO_JAR &#x2F;tmp 2&gt;&gt; &#x2F;dev&#x2F;null &gt;&gt; &#x2F;dev&#x2F;null &amp;</span><br><span class="line">                        echo $! &gt; $PID_PATH_NAME</span><br><span class="line">            echo “$SERVICE_NAME started …”</span><br><span class="line">        else</span><br><span class="line">            echo “$SERVICE_NAME is already running …”</span><br><span class="line">        fi</span><br><span class="line">    ;;</span><br><span class="line">    stop)</span><br><span class="line">        if [ -f $PID_PATH_NAME ]; then</span><br><span class="line">            PID&#x3D;$(cat $PID_PATH_NAME);</span><br><span class="line">            echo “$SERVICE_NAME stoping …”</span><br><span class="line">            kill $PID;</span><br><span class="line">            echo “$SERVICE_NAME stopped …”</span><br><span class="line">            rm $PID_PATH_NAME</span><br><span class="line">        else</span><br><span class="line">            echo “$SERVICE_NAME is not running …”</span><br><span class="line">        fi</span><br><span class="line">    ;;</span><br><span class="line">    restart)</span><br><span class="line">        if [ -f $PID_PATH_NAME ]; then</span><br><span class="line">            PID&#x3D;$(cat $PID_PATH_NAME);</span><br><span class="line">            echo “$SERVICE_NAME stopping …”;</span><br><span class="line">            kill $PID;</span><br><span class="line">            echo “$SERVICE_NAME stopped …”;</span><br><span class="line">            rm $PID_PATH_NAME</span><br><span class="line">            echo “$SERVICE_NAME starting …”</span><br><span class="line">            nohup java -jar $PATH_TO_JAR &#x2F;tmp 2&gt;&gt; &#x2F;dev&#x2F;null &gt;&gt; &#x2F;dev&#x2F;null &amp;</span><br><span class="line">                        echo $! &gt; $PID_PATH_NAME</span><br><span class="line">            echo “$SERVICE_NAME started …”</span><br><span class="line">        else</span><br><span class="line">            echo “$SERVICE_NAME is not running …”</span><br><span class="line">        fi</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+
+<p>Commande</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-rc.d planningmenugui defaults</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2016/04/22/service_ubuntu_jar/" data-id="ckjrk35qv002azku75oeh8lrg" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dclaration_de_client_et_serveur_soap_cxp_avec_spring_sans_configuration_xml" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2016/04/06/dclaration_de_client_et_serveur_soap_cxp_avec_spring_sans_configuration_xml/" class="article-date">
+  <time datetime="2016-04-05T22:00:00.000Z" itemprop="datePublished">2016-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2016/04/06/dclaration_de_client_et_serveur_soap_cxp_avec_spring_sans_configuration_xml/">Déclaration de client et serveur SOAP CXF avec Spring sans configuration XML</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Client-SOAP"><a href="#Client-SOAP" class="headerlink" title="Client SOAP"></a>Client SOAP</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(basePackages = &#123; “com.my.package” &#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    Environment env;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MyServicePortType <span class="title">myServiceClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String serviceUrl= env.getProperty(“my.service.url”);</span><br><span class="line">        <span class="keyword">final</span> JaxWsProxyFactoryBean factory = <span class="keyword">new</span> JaxWsProxyFactoryBean();</span><br><span class="line">        factory.setAddress(serviceUrl);</span><br><span class="line">        factory.setServiceClass(MyServicePortType e.class);</span><br><span class="line">        <span class="keyword">return</span> (MyServicePortType ) factory.create();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>Pour activer la validation des flux soap:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> MyServicePortType myPortType = (MyServicePortType) factory.create();</span><br><span class="line">((BindingProvider) myPortType).getRequestContext().put(“schema-validation-enabled”, “<span class="keyword">true</span>”);</span><br><span class="line"><span class="keyword">return</span> myPortType;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Server-SOAP"><a href="#Server-SOAP" class="headerlink" title="Server SOAP"></a>Server SOAP</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ImportResource(&#123; “classpath:META-INF/cxf/cxf.xml”, “classpath:META-INF/cxf/cxf-servlet.xml” &#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CXFServletConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* CXF bus for binding.    */</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Bus bus;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> GetVersion getVersionService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Endpoint <span class="title">versionEndpoint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> EndpointImpl endpoint = <span class="keyword">new</span> EndpointImpl(<span class="keyword">this</span>.bus, <span class="keyword">this</span>.getVersionService);</span><br><span class="line">        endpoint.setAddress(“/version”);</span><br><span class="line">        endpoint.publish();</span><br><span class="line">        <span class="keyword">return</span> endpoint;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2016/04/06/dclaration_de_client_et_serveur_soap_cxp_avec_spring_sans_configuration_xml/" data-id="ckjrk35q1000xzku7acj3f5d0" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/CXF/" rel="tag">CXF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/JAX-WS/" rel="tag">JAX-WS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-my_recommended_brackets_extensions_from_johnpapa" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2016/03/07/my_recommended_brackets_extensions_from_johnpapa/" class="article-date">
+  <time datetime="2016-03-06T23:00:00.000Z" itemprop="datePublished">2016-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2016/03/07/my_recommended_brackets_extensions_from_johnpapa/">&#39;My Recommended Brackets Extensions&#39; from johnpapa</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>‘My Recommended Brackets Extensions’ from johnpapa<br>Beautify<br>Brackets Extension that formats open HTML, CSS, and JavaScript files using js-beautify. Cmd-Shift-L (Mac) / Ctrl-Shift-L (Win) key.</p>
+<p>Pour inhiber localement beautify, il faut utiliser les commentaires suivants:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* beautify preserve:start */</span></span><br><span class="line">&#123;</span><br><span class="line">   browserName:    &#x27;internet explorer&#x27;,</span><br><span class="line">   platform:       &#x27;Windows 7&#x27;,</span><br><span class="line">   version:        &#x27;8&#x27;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* beautify preserve:end */</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><a target="_blank" rel="noopener" href="https://github.com/crot4lus/Brackets---Tabs">Brackets File Tabs</a></strong><br>Use tabs rather than the sidebar for working files. Enable by choosing Show tabs in the View menu.</p>
+<p><strong><a target="_blank" rel="noopener" href="https://github.com/davidderaedt/annotate-extension">Brackets JSDoc Annotate</a></strong><br>A brackets extension to generate JSDoc annotations for your functions. CTRL+Alt+A keys.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">&quot;fonts.fontSize&quot;</span>: <span class="string">&quot;12px&quot;</span>,</span><br><span class="line">   <span class="attr">&quot;themes.theme&quot;</span>: <span class="string">&quot;dark-theme&quot;</span>,</span><br><span class="line">   <span class="attr">&quot;fonts.fontFamily&quot;</span>: <span class="string">&quot;&#x27;SourceCodePro-Medium&#x27;, ＭＳ ゴシック, &#x27;MS Gothic&#x27;, monospace&quot;</span>,</span><br><span class="line">   <span class="attr">&quot;linting.collapsed&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">   <span class="attr">&quot;proxy&quot;</span>: <span class="string">&quot;http://user:password@www-cache.aql.fr:3128&quot;</span>,</span><br><span class="line">   <span class="attr">&quot;hirse.beautify.onSave&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">   <span class="attr">&quot;highlightMatches&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">   <span class="attr">&quot;fileFilters&quot;</span>: [</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;java&quot;</span>,</span><br><span class="line">           <span class="attr">&quot;patterns&quot;</span>: [</span><br><span class="line">               <span class="string">&quot;*.java&quot;</span>,</span><br><span class="line">               <span class="string">&quot;*.class&quot;</span>,</span><br><span class="line">               <span class="string">&quot;*/prod/*&quot;</span>,</span><br><span class="line">               <span class="string">&quot;*/target/*&quot;</span>,</span><br><span class="line">               <span class="string">&quot;*.xml&quot;</span>,</span><br><span class="line">               <span class="string">&quot;*.iml&quot;</span>,</span><br><span class="line">               <span class="string">&quot;*.wsdl&quot;</span></span><br><span class="line">           ]</span><br><span class="line">       &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Brackets Outline<br><a target="_blank" rel="noopener" href="https://github.com/Hirse/brackets-outline-list">https://github.com/Hirse/brackets-outline-list</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.johnpapa.net/my-recommended-brackets-extensions/">source</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2016/03/07/my_recommended_brackets_extensions_from_johnpapa/" data-id="ckjrk35qq0023zku78yst0ewr" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Brackets/" rel="tag">Brackets</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Javascript/" rel="tag">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-affichage-branche-git-prompt-shell" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2016/02/02/affichage-branche-git-prompt-shell/" class="article-date">
+  <time datetime="2016-02-01T23:00:00.000Z" itemprop="datePublished">2016-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2016/02/02/affichage-branche-git-prompt-shell/">Branche git et prompt shell</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>======= affichage-branche-git-prompt-shell<br>UPDATE 2020</p>
+<p>Utiliser plutôt <a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh" title="Example"> Oh-my-zsh</a> qui gère nativement cet affichage et possède de nombreuses autres features.</p>
+<p>=======</p>
+<p><img src="./prompt.png" alt="résultat"></p>
+<p>Télécharger dans son répertoire perso, le script SH qui fait le boulot:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh</span><br></pre></td></tr></table></figure>
+
+<p>Modifier son .bashrc</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>Se placer à la ligne où on définit l’entête du prompt.<br>Executer le script précédemment téléchargé, puis modifier le prompt.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Load <span class="keyword">in</span> the git branch prompt script.</span></span><br><span class="line">source ~/.git-prompt.sh</span><br><span class="line"></span><br><span class="line">if [ &quot;$color_prompt&quot; = yes ]; then</span><br><span class="line">   PS1=&#x27;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\e[33m\]$(__git_ps1 &quot; (%s)&quot;)\[\e[m\]\$ &#x27;</span><br><span class="line"><span class="meta">   #</span><span class="bash"> PS1=<span class="string">&#x27;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \[\e[33m\]$(__git_ps1 &quot;(%s)&quot;)\[\033[01;34m\]\$\[\033[00m\] &#x27;</span></span></span><br><span class="line">else</span><br><span class="line">   PS1=&#x27;[\u@\h \w$(__git_ps1 &quot; (%s)&quot;)]\$ &#x27;</span><br><span class="line">Fi</span><br></pre></td></tr></table></figure>
+
+<p>Mettre à jour son .bashrc</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>Source :<br><a target="_blank" rel="noopener" href="http://git-prompt.sh/">http://git-prompt.sh/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2016/02/02/affichage-branche-git-prompt-shell/" data-id="ckjrk35pm000gzku77c3whq98" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Shell/" rel="tag">Shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ssh_config__se_simplifier_la_conf_ssh" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2016/02/02/ssh_config__se_simplifier_la_conf_ssh/" class="article-date">
+  <time datetime="2016-02-01T23:00:00.000Z" itemprop="datePublished">2016-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2016/02/02/ssh_config__se_simplifier_la_conf_ssh/">SSH Config - se simplifier la conf SSH</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Ajouter un fichier config dans son répertoire SSH perso.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~&#x2F;.ssh&#x2F;config</span><br></pre></td></tr></table></figure>
+
+<p>Préciser une liste de Host / Hostname / User</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host myAlias</span><br><span class="line">        Hostname 192.xxx.xxx.xxx</span><br><span class="line">        User myUser</span><br><span class="line">        Port 22</span><br></pre></td></tr></table></figure>
+
+<p>Pour se connecter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh myAlias</span><br></pre></td></tr></table></figure>
+
+<p>Au lieu de</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh myUser@192.xxx.xxx.xxx -p 22</span><br></pre></td></tr></table></figure>
+
+<p>Copier la clé ssh publique sur un server distant</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat .ssh&#x2F;id_rsa.pub | ssh sie017@192.168.131.162 ‘cat &gt;&gt; .ssh&#x2F;authorized_keys’</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2016/02/02/ssh_config__se_simplifier_la_conf_ssh/" data-id="ckjrk35r4002pzku7488wdzte" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/SSH/" rel="tag">SSH</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-type_de_rtro" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2016/02/02/type_de_rtro/" class="article-date">
+  <time datetime="2016-02-01T23:00:00.000Z" itemprop="datePublished">2016-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2016/02/02/type_de_rtro/">Type de Rétro</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="La-retro-classique"><a href="#La-retro-classique" class="headerlink" title="La rétro classique"></a>La rétro classique</h1><p>Sur post-it, chacun déclare:</p>
+<ul>
+<li>point positif</li>
+<li>point à améliorer</li>
+</ul>
+<p>Après présentation des points, on en retire des axes d’amélioration.</p>
+<h1 id="La-retro-Jeopardy"><a href="#La-retro-Jeopardy" class="headerlink" title="La rétro Jéopardy"></a>La rétro Jéopardy</h1><p>Sur post-it, chacun inscrit la réponse a une question qu’il a en tête.<br>Une par une, on passe en revue les réponses et on cherche les questions qui pourraient correspondre.</p>
+<p>Après discussions sur les questions, on en retire des axes d’amélioration.</p>
+<h1 id="La-retro-speciale-Noel-a-faire-entre-le-06-et-le-25-decembre"><a href="#La-retro-speciale-Noel-a-faire-entre-le-06-et-le-25-decembre" class="headerlink" title="La rétro spéciale Noël (à faire entre le 06 et le 25 décembre.)"></a>La rétro spéciale Noël (à faire entre le 06 et le 25 décembre.)</h1><p>Sur 3 post it, chacun inscrit :</p>
+<ul>
+<li>Père Noël, je voudrais …</li>
+<li>Saint Nicolas, merci pour …</li>
+<li>Père Fouettard, je ne veux plus …</li>
+</ul>
+<p>On en retire des bonnes résolutions pour la nouvelle année…</p>
+<h1 id="La-retro-cadran"><a href="#La-retro-cadran" class="headerlink" title="La rétro cadran"></a>La rétro cadran</h1><p>Plus | Moins<br>——  | ——<br>Idée | Question</p>
+<p>Chacun pose des post it sur les 4 coins du cadran.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2016/02/02/type_de_rtro/" data-id="ckjrk35s7005nzku716m7h06d" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Agilite/" rel="tag">Agilité</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Scrum/" rel="tag">Scrum</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-outils_sympas_sous_windows" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2016/01/07/outils_sympas_sous_windows/" class="article-date">
+  <time datetime="2016-01-06T23:00:00.000Z" itemprop="datePublished">2016-01-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2016/01/07/outils_sympas_sous_windows/">Outils sympas sous Windows</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Outils sympas sous Windows:</p>
+<ul>
+<li>Clover : ajout d’onglet dans l’explorateur de fichiers Windows</li>
+<li>Launchy : lancement d’application rapide</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2016/01/07/outils_sympas_sous_windows/" data-id="ckjrk35qr0025zku70ii26g2v" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Windows/" rel="tag">Windows</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/technical-debt/page/2/">&lt;&lt; Précédent</a><a class="page-number" href="/technical-debt/">1</a><a class="page-number" href="/technical-debt/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/technical-debt/page/4/">4</a><a class="page-number" href="/technical-debt/page/5/">5</a><a class="extend next" rel="next" href="/technical-debt/page/4/">Suivant &gt;&gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Agilite/" rel="tag">Agilité</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/AssertJ/" rel="tag">AssertJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Brackets/" rel="tag">Brackets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Bricolage/" rel="tag">Bricolage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CRON/" rel="tag">CRON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/CXF/" rel="tag">CXF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Coldfusion/" rel="tag">Coldfusion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/DHT22/" rel="tag">DHT22</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/DIY/" rel="tag">DIY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/ESP8266/" rel="tag">ESP8266</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Eclipse/" rel="tag">Eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Hacker/" rel="tag">Hacker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Http/" rel="tag">Http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/JAX-WS/" rel="tag">JAX-WS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Mockito/" rel="tag">Mockito</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/NodeJs/" rel="tag">NodeJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/RPM/" rel="tag">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SPRING/" rel="tag">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/SSL/" rel="tag">SSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Scrum/" rel="tag">Scrum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Syno/" rel="tag">Syno</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/TU/" rel="tag">TU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/TrueCrypt/" rel="tag">TrueCrypt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/arduino/" rel="tag">arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/technical-debt/tags/javascript/" rel="tag">javascript</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/technical-debt/tags/Agilite/" style="font-size: 10px;">Agilité</a> <a href="/technical-debt/tags/AssertJ/" style="font-size: 10px;">AssertJ</a> <a href="/technical-debt/tags/Brackets/" style="font-size: 10px;">Brackets</a> <a href="/technical-debt/tags/Bricolage/" style="font-size: 10px;">Bricolage</a> <a href="/technical-debt/tags/CRON/" style="font-size: 10px;">CRON</a> <a href="/technical-debt/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/technical-debt/tags/CXF/" style="font-size: 11.43px;">CXF</a> <a href="/technical-debt/tags/Coldfusion/" style="font-size: 10px;">Coldfusion</a> <a href="/technical-debt/tags/DHT22/" style="font-size: 10px;">DHT22</a> <a href="/technical-debt/tags/DIY/" style="font-size: 11.43px;">DIY</a> <a href="/technical-debt/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/technical-debt/tags/ESP8266/" style="font-size: 10px;">ESP8266</a> <a href="/technical-debt/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/technical-debt/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/technical-debt/tags/Hacker/" style="font-size: 10px;">Hacker</a> <a href="/technical-debt/tags/Http/" style="font-size: 10px;">Http</a> <a href="/technical-debt/tags/JAX-WS/" style="font-size: 15.71px;">JAX-WS</a> <a href="/technical-debt/tags/Java/" style="font-size: 20px;">Java</a> <a href="/technical-debt/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/technical-debt/tags/Linux/" style="font-size: 18.57px;">Linux</a> <a href="/technical-debt/tags/Maven/" style="font-size: 12.86px;">Maven</a> <a href="/technical-debt/tags/Mockito/" style="font-size: 11.43px;">Mockito</a> <a href="/technical-debt/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/technical-debt/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/technical-debt/tags/RPM/" style="font-size: 11.43px;">RPM</a> <a href="/technical-debt/tags/SPRING/" style="font-size: 14.29px;">SPRING</a> <a href="/technical-debt/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/technical-debt/tags/SSH/" style="font-size: 11.43px;">SSH</a> <a href="/technical-debt/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/technical-debt/tags/Scrum/" style="font-size: 10px;">Scrum</a> <a href="/technical-debt/tags/Shell/" style="font-size: 14.29px;">Shell</a> <a href="/technical-debt/tags/Spring/" style="font-size: 17.14px;">Spring</a> <a href="/technical-debt/tags/Syno/" style="font-size: 10px;">Syno</a> <a href="/technical-debt/tags/TU/" style="font-size: 14.29px;">TU</a> <a href="/technical-debt/tags/TrueCrypt/" style="font-size: 10px;">TrueCrypt</a> <a href="/technical-debt/tags/Windows/" style="font-size: 14.29px;">Windows</a> <a href="/technical-debt/tags/arduino/" style="font-size: 10px;">arduino</a> <a href="/technical-debt/tags/java/" style="font-size: 10px;">java</a> <a href="/technical-debt/tags/javascript/" style="font-size: 10px;">javascript</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2021/01/">janvier 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/12/">décembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/11/">novembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/12/">décembre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/10/">octobre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/06/">juin 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/02/">février 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/01/">janvier 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/09/">septembre 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/07/">juillet 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/05/">mai 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/02/">février 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/01/">janvier 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/12/">décembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/09/">septembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/08/">août 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/06/">juin 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/04/">avril 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/03/">mars 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/02/">février 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/01/">janvier 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/12/">décembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/09/">septembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/08/">août 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/05/">mai 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/04/">avril 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/03/">mars 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/02/">février 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/11/">novembre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/10/">octobre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/08/">août 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/01/">janvier 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/">I2C Screen sur ESP8266</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2020/12/09/commandeRPM/">RPM commandes</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2020/11/28/monitoringTemperatureESP8266/">Monitoring de température</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2018/12/24/diskusage/">Disk Usage</a>
+          </li>
+        
+          <li>
+            <a href="/technical-debt/2018/10/24/ssh-via-rebond/">ssh via rebond</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Antoine BZH<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/technical-debt/" class="mobile-nav-link">Home</a>
+  
+    <a href="/technical-debt/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/technical-debt/fancybox/jquery.fancybox.css">
+
+  
+<script src="/technical-debt/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/technical-debt/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
