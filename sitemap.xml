@@ -149,14 +149,14 @@
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2020/11/28/monitoringTemperatureESP8266/</loc>
+    <loc>https://amouchere.github.io/technical-debt/2016/03/07/my_recommended_brackets_extensions_from_johnpapa/</loc>
     
     <lastmod>2020-12-09</lastmod>
     
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2016/03/07/my_recommended_brackets_extensions_from_johnpapa/</loc>
+    <loc>https://amouchere.github.io/technical-debt/2020/11/28/monitoringTemperatureESP8266/</loc>
     
     <lastmod>2020-12-09</lastmod>
     
@@ -184,14 +184,14 @@
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2016/06/10/linux_dev_env/</loc>
+    <loc>https://amouchere.github.io/technical-debt/2015/05/27/maven_enforcer_plugin__the_loving_iron_fist_of_maven/</loc>
     
     <lastmod>2020-12-09</lastmod>
     
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2015/05/27/maven_enforcer_plugin__the_loving_iron_fist_of_maven/</loc>
+    <loc>https://amouchere.github.io/technical-debt/2016/06/10/linux_dev_env/</loc>
     
     <lastmod>2020-12-09</lastmod>
     
@@ -261,14 +261,14 @@
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2017/01/19/autoincrement-MySQL/</loc>
+    <loc>https://amouchere.github.io/technical-debt/2015/05/17/capter_les_traces_http_en_local/</loc>
     
     <lastmod>2020-12-09</lastmod>
     
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2015/05/17/capter_les_traces_http_en_local/</loc>
+    <loc>https://amouchere.github.io/technical-debt/2017/01/19/autoincrement-MySQL/</loc>
     
     <lastmod>2020-12-09</lastmod>
     
@@ -296,14 +296,14 @@
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2016/04/06/dclaration_de_client_et_serveur_soap_cxp_avec_spring_sans_configuration_xml/</loc>
+    <loc>https://amouchere.github.io/technical-debt/2018/12/24/diskusage/</loc>
     
     <lastmod>2020-12-09</lastmod>
     
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2018/12/24/diskusage/</loc>
+    <loc>https://amouchere.github.io/technical-debt/2016/04/06/dclaration_de_client_et_serveur_soap_cxp_avec_spring_sans_configuration_xml/</loc>
     
     <lastmod>2020-12-09</lastmod>
     
@@ -424,13 +424,6 @@
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/tags/arduino/</loc>
-    <lastmod>2021-01-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://amouchere.github.io/technical-debt/tags/Git/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
@@ -445,7 +438,21 @@
   </url>
   
   <url>
+    <loc>https://amouchere.github.io/technical-debt/tags/arduino/</loc>
+    <lastmod>2021-01-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://amouchere.github.io/technical-debt/tags/Windows/</loc>
+    <lastmod>2021-01-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/tags/Http/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -460,13 +467,6 @@
   
   <url>
     <loc>https://amouchere.github.io/technical-debt/tags/MySQL/</loc>
-    <lastmod>2021-01-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://amouchere.github.io/technical-debt/tags/Http/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -571,20 +571,6 @@
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/tags/ESP8266/</loc>
-    <lastmod>2021-01-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://amouchere.github.io/technical-debt/tags/DHT22/</loc>
-    <lastmod>2021-01-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://amouchere.github.io/technical-debt/tags/Javascript/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
@@ -593,6 +579,20 @@
   
   <url>
     <loc>https://amouchere.github.io/technical-debt/tags/Brackets/</loc>
+    <lastmod>2021-01-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/tags/ESP8266/</loc>
+    <lastmod>2021-01-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/tags/DHT22/</loc>
     <lastmod>2021-01-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

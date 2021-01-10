@@ -5,19 +5,14 @@
   
 
   
-  <title>Création dynamique d&#39;un logger | Technical Debt</title>
+  <title>Technical Debt</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="How to create a logback logger by the code: 1234567891011121314151617181920212223242526272829303132333435public class DynamicLogger &amp;#123;    private static LoggerContext context &#x3D; (LoggerContext) Log">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Création dynamique d&#39;un logger">
-<meta property="og:url" content="https://amouchere.github.io/technical-debt/2017/02/21/dynamicLogger/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Technical Debt">
+<meta property="og:url" content="https://amouchere.github.io/technical-debt/technical-debt/page/3/index.html">
 <meta property="og:site_name" content="Technical Debt">
-<meta property="og:description" content="How to create a logback logger by the code: 1234567891011121314151617181920212223242526272829303132333435public class DynamicLogger &amp;#123;    private static LoggerContext context &#x3D; (LoggerContext) Log">
 <meta property="og:locale" content="fr_FR">
-<meta property="article:published_time" content="2017-02-21T08:20:48.000Z">
-<meta property="article:modified_time" content="2020-12-09T19:39:32.064Z">
 <meta property="article:author" content="Antoine BZH">
-<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/technical-debt/atom.xml" title="Technical Debt" type="application/atom+xml">
@@ -67,7 +62,160 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-dynamicLogger" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-Liste-d-annotation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2017/09/30/Liste-d-annotation/" class="article-date">
+  <time datetime="2017-09-30T20:17:41.000Z" itemprop="datePublished">2017-09-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2017/09/30/Liste-d-annotation/">Liste d&#39;annotation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Lister les annotations utilisées dans un projet Java</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat **&#x2F;*.java | grep @ | sed &#39;s&#x2F;\(.*\)\(@[A-Za-z]*\)\([( ].*\)&#x2F;\2&#x2F;&#39; | sort -b | sed -e &#39;s&#x2F;^[ \t]*&#x2F;&#x2F;g&#39; | uniq</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2017/09/30/Liste-d-annotation/" data-id="ckjrkmwqq00095ou700t91ues" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Shell/" rel="tag">Shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shedlock" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2017/07/04/shedlock/" class="article-date">
+  <time datetime="2017-07-04T08:48:11.000Z" itemprop="datePublished">2017-07-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2017/07/04/shedlock/">ShedLock</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ShedLock s’assure qu’une tâche ne sera éxecutée qu’une seule fois à un instant t.<br>ShedLock utilise des verrous en BDD (mysql, Redis, … ). 1 verrou par tâche ou groupe de tâche.</p>
+<p>Peut-être une alternative à Quartz pour gérer des tâches ordonnancées dans un environnement multi-noeuds.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lukas-krecan/ShedLock">source</a></p>
+<h3 id="Dependances-jdbc-lock-provider"><a href="#Dependances-jdbc-lock-provider" class="headerlink" title="Dépendances (jdbc lock provider)"></a>Dépendances (jdbc lock provider)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;net.javacrumbs.shedlock&lt;&#x2F;groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;shedlock-spring&lt;&#x2F;artifactId&gt;</span><br><span class="line">   &lt;version&gt;0.12.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;net.javacrumbs.shedlock&lt;&#x2F;groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;shedlock-provider-jdbc-template&lt;&#x2F;artifactId&gt;</span><br><span class="line">   &lt;version&gt;0.12.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tache"><a href="#Tache" class="headerlink" title="Tâche"></a>Tâche</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Scheduled(fixedRate &#x3D; 6000)</span><br><span class="line">@SchedulerLock(name &#x3D; &quot;scheduledTaskName&quot;)</span><br><span class="line">public void doYourTask() &#123;</span><br><span class="line">  &#x2F;&#x2F; Do your task</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><p>fin de lock par défaut: defaultLockAtMostFor</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@EnableScheduling</span><br><span class="line">@Configuration</span><br><span class="line">public class SchedulerConfiguration &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public LockProvider lockProvider(DataSource dataSource) &#123;</span><br><span class="line">        return new JdbcTemplateLockProvider(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public ScheduledLockConfiguration taskScheduler(LockProvider lockProvider) &#123;</span><br><span class="line">        return ScheduledLockConfigurationBuilder</span><br><span class="line">                .withLockProvider(lockProvider)</span><br><span class="line">                .withPoolSize(10)</span><br><span class="line">                .withDefaultLockAtMostFor(Duration.ofMinutes(1))</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Projet de test (SpringBoot/Docker): <a target="_blank" rel="noopener" href="https://github.com/amouchere/shedlockDemo">https://github.com/amouchere/shedlockDemo</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2017/07/04/shedlock/" data-id="ckjrkmws2002d5ou7e9fu5rp7" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/SPRING/" rel="tag">SPRING</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JGitFlow" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2017/05/12/JGitFlow/" class="article-date">
+  <time datetime="2017-05-12T12:07:30.000Z" itemprop="datePublished">2017-05-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2017/05/12/JGitFlow/">JGitFlow</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Le plugin maven <tt>jgit-flow</tt> est utilisé afin de simplifier au maximum la création d’une ‘’release’’ pour un module autonome :</p>
+<ul>
+<li><tt>release-start</tt> :<ul>
+<li>création d’une branche de stabilisation (‘’release’’) pour une version donnée</li>
+<li>montée en version mineure de la branche <tt>develop</tt> ;</li>
+</ul>
+</li>
+<li><tt>release-finish</tt> : finalisation de la ‘’release’’ :<ul>
+<li>suppression du suffix <tt>-SNAPSHOT</tt>,</li>
+<li>merge sur <tt>master</tt></li>
+<li>création du tag</li>
+</ul>
+</li>
+</ul>
+<h1 id="Prerequis"><a href="#Prerequis" class="headerlink" title="Prérequis"></a>Prérequis</h1><ul>
+<li>Vérifier que le pom.xml contient la configuration suivante :<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>external.atlassian.jgitflow<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jgitflow-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-m5.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">flowInitContext</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">masterBranchName</span>&gt;</span>master<span class="tag">&lt;/<span class="name">masterBranchName</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">developBranchName</span>&gt;</span>develop<span class="tag">&lt;/<span class="name">developBranchName</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">versionTagPrefix</span>&gt;</span>v-<span class="tag">&lt;/<span class="name">versionTagPrefix</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">flowInitContext</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">noDeploy</span>&gt;</span>true<span class="tag">&lt;/<span class="name">noDeploy</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">squash</span>&gt;</span>false<span class="tag">&lt;/<span class="name">squash</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scmCommentPrefix</span>&gt;</span>[RELEASE] <span class="tag">&lt;/<span class="name">scmCommentPrefix</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">useReleaseProfile</span>&gt;</span>false<span class="tag">&lt;/<span class="name">useReleaseProfile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>Avoir les branches locales <tt>develop</tt> et <tt>master</tt> à jour.</li>
+</ul>
+<h1 id="Demarrage-de-la-‘’release’’"><a href="#Demarrage-de-la-‘’release’’" class="headerlink" title="Démarrage de la ‘’release’’"></a>Démarrage de la ‘’release’’</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn jgitflow:release-start</span><br></pre></td></tr></table></figure>
+<h1 id="Finalisation-de-la-‘’release’’"><a href="#Finalisation-de-la-‘’release’’" class="headerlink" title="Finalisation de la ‘’release’’"></a>Finalisation de la ‘’release’’</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn jgitflow:release-finish</span><br></pre></td></tr></table></figure>
+<p>Puis, pousser les branches <tt>master</tt> et <tt>develop</tt> et les tags</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br><span class="line">git push origin develop</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2017/05/12/JGitFlow/" data-id="ckjrkmwqn00065ou7fc6143yq" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Maven/" rel="tag">Maven</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dynamicLogger" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/technical-debt/2017/02/21/dynamicLogger/" class="article-date">
   <time datetime="2017-02-21T08:20:48.000Z" itemprop="datePublished">2017-02-21</time>
@@ -80,8 +228,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Création dynamique d&#39;un logger
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2017/02/21/dynamicLogger/">Création dynamique d&#39;un logger</a>
     </h1>
   
 
@@ -103,28 +251,57 @@
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/technical-debt/2017/05/12/JGitFlow/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          JGitFlow
-        
-      </div>
-    </a>
-  
-  
-    <a href="/technical-debt/2017/01/19/autoincrement-MySQL/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">Vérifier l&#39;autoincrément en MySQL</div>
-    </a>
-  
-</nav>
+</article>
+
 
   
+    <article id="post-autoincrement-MySQL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2017/01/19/autoincrement-MySQL/" class="article-date">
+  <time datetime="2017-01-19T10:57:28.000Z" itemprop="datePublished">2017-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2017/01/19/autoincrement-MySQL/">Vérifier l&#39;autoincrément en MySQL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Sur une base de donnée MySQL, pour identifier le type de colonne auto-incrémentée et vérifier la valeur courant de l’incrément. </p>
+<p>Utile pour vérifier si le seuil maximal du champ est bientôt atteint. </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  t.TABLE_SCHEMA,</span><br><span class="line">  t.TABLE_NAME,</span><br><span class="line">  t.AUTO_INCREMENT,</span><br><span class="line">  c.COLUMN_TYPE</span><br><span class="line"><span class="keyword">from</span> INFORMATION_SCHEMA.tables t, INFORMATION_SCHEMA.columns c</span><br><span class="line"><span class="keyword">where</span> t.TABLE_SCHEMA = c.TABLE_SCHEMA</span><br><span class="line">      <span class="keyword">and</span> t.TABLE_NAME = c.TABLE_NAME</span><br><span class="line">      <span class="keyword">and</span> t.AUTO_INCREMENT <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">null</span></span><br><span class="line">      <span class="keyword">and</span> t.TABLE_SCHEMA <span class="keyword">like</span> <span class="string">&#x27;%&#x27;</span></span><br><span class="line">      <span class="keyword">and</span> c.TABLE_SCHEMA <span class="keyword">like</span> <span class="string">&#x27;%&#x27;</span></span><br><span class="line">      <span class="keyword">and</span> extra <span class="keyword">like</span> <span class="string">&#x27;%auto_increment%&#x27;</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">CONCAT_WS</span>(<span class="string">&#x27;.&#x27;</span>, t.table_schema, t.TABLE_NAME) <span class="keyword">asc</span>;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2017/01/19/autoincrement-MySQL/" data-id="ckjrkmwr1000n5ou74l89drcy" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/SQL/" rel="tag">SQL</a></li></ul>
+
+    </footer>
+  </div>
+  
 </article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/technical-debt/technical-debt/page/2/">&lt;&lt; Précédent</a><a class="page-number" href="/technical-debt/technical-debt/">1</a><a class="page-number" href="/technical-debt/technical-debt/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/technical-debt/technical-debt/page/4/">4</a><a class="page-number" href="/technical-debt/technical-debt/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/technical-debt/technical-debt/page/10/">10</a><a class="extend next" rel="next" href="/technical-debt/technical-debt/page/4/">Suivant &gt;&gt;</a>
+  </nav>
 
 </section>
         
