@@ -1,5 +1,5 @@
 ---
-title: DIY cable RJ45 aa
+title: DIY cable RJ45
 date: 2014-10-11
 tags: [Bricolage, DIY]
 description: "Refaire les embouts des cables RJ45. "
