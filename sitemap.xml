@@ -93,55 +93,6 @@
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2017/05/12/JGitFlow/</loc>
-    
-    <lastmod>2022-08-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://amouchere.github.io/technical-debt/2017/09/30/Liste-d-annotation/</loc>
-    
-    <lastmod>2022-08-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://amouchere.github.io/technical-debt/2018/02/09/Log-Request-Filter-for-Spring-application/</loc>
-    
-    <lastmod>2022-08-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://amouchere.github.io/technical-debt/2017/01/11/Metrics-for-spring/</loc>
-    
-    <lastmod>2022-08-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://amouchere.github.io/technical-debt/2016/09/05/Ubuntu-third-party-apps-installation/</loc>
-    
-    <lastmod>2022-08-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://amouchere.github.io/technical-debt/2016/02/02/affichage-branche-git-prompt-shell/</loc>
-    
-    <lastmod>2022-08-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://amouchere.github.io/technical-debt/2014/11/14/ajouter_une_action_au_menu_contextuel_windows/</loc>
-    
-    <lastmod>2022-08-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://amouchere.github.io/technical-debt/2017/01/19/autoincrement-MySQL/</loc>
     
     <lastmod>2022-08-03</lastmod>
@@ -220,6 +171,13 @@
   
   <url>
     <loc>https://amouchere.github.io/technical-debt/2015/02/03/gcs_git_cheat_sheet/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/2022/08/03/git_https_to_ssh/</loc>
     
     <lastmod>2022-08-03</lastmod>
     
@@ -317,14 +275,49 @@
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2018/02/09/HTTP-interceptor-With-SpringBoot/</loc>
+    <loc>https://amouchere.github.io/technical-debt/2017/05/12/JGitFlow/</loc>
     
     <lastmod>2022-08-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/</loc>
+    <loc>https://amouchere.github.io/technical-debt/2017/09/30/Liste-d-annotation/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/2018/02/09/Log-Request-Filter-for-Spring-application/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/2017/01/11/Metrics-for-spring/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/2016/09/05/Ubuntu-third-party-apps-installation/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/2016/02/02/affichage-branche-git-prompt-shell/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/2014/11/14/ajouter_une_action_au_menu_contextuel_windows/</loc>
     
     <lastmod>2022-08-03</lastmod>
     
@@ -346,6 +339,20 @@
   
   <url>
     <loc>https://amouchere.github.io/technical-debt/2014/10/11/DIY-cable-RJ45/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/2018/02/09/HTTP-interceptor-With-SpringBoot/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://amouchere.github.io/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/</loc>
     
     <lastmod>2022-08-03</lastmod>
     

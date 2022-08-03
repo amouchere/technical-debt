@@ -64,6 +64,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-insrer_du_cdata_dans_un_flux_soap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/technical-debt/2015/04/03/insrer_du_cdata_dans_un_flux_soap/" class="article-date">
+  <time datetime="2015-04-03T00:00:00.000Z" itemprop="datePublished">2015-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/technical-debt/2015/04/03/insrer_du_cdata_dans_un_flux_soap/">Insérer du CDATA dans un flux SOAP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(<span class="keyword">final</span> Message message)</span> </span>&#123;</span><br><span class="line">        message.put(“disable.outputstream.optimization”, Boolean.TRUE);</span><br><span class="line">        <span class="keyword">final</span> XMLStreamWriter writer = StaxUtils.createXMLStreamWriter(message.getContent(OutputStream.class));</span><br><span class="line">        message.setContent(XMLStreamWriter.class, <span class="keyword">new</span> CDataXMLStreamWriter(writer));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.amouchere.impl.soap.interceptor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.xml.stream.XMLStreamException;</span><br><span class="line"><span class="keyword">import</span> javax.xml.stream.XMLStreamWriter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.cxf.staxutils.DelegatingXMLStreamWriter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  This StreamWriter is used to put CDATA tag into xml when the xml node is “myTag”</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CDataXMLStreamWriter</span> <span class="keyword">extends</span> <span class="title">DelegatingXMLStreamWriter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String TAG_NAME = “myTag”;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String currentElementName;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CDataXMLStreamWriter</span><span class="params">(<span class="keyword">final</span> XMLStreamWriter del)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(del);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /</span><br><span class="line"></span><br><span class="line">      <span class="meta">@return</span> <span class="function"><span class="keyword">true</span> <span class="keyword">if</span> the current element is the right <span class="title">one</span> <span class="params">(CDATA)</span>.</span></span><br><span class="line"><span class="function">     */</span></span><br><span class="line"><span class="function">    <span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkIfCDATAneededForCurrentElement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (TAG_NAME.equals(<span class="keyword">this</span>.currentElementName)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeCharacters</span><span class="params">(<span class="keyword">final</span> String text)</span> <span class="keyword">throws</span> XMLStreamException </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">boolean</span> useCData = <span class="keyword">this</span>.checkIfCDATAneededForCurrentElement();</span><br><span class="line">        <span class="keyword">if</span> (useCData) &#123;</span><br><span class="line">            <span class="keyword">super</span>.writeCData(text);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">super</span>.writeCharacters(text);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeStartElement</span><span class="params">(<span class="keyword">final</span> String prefix, <span class="keyword">final</span> String local, <span class="keyword">final</span> String uri)</span> <span class="keyword">throws</span> XMLStreamException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.currentElementName = local;</span><br><span class="line">        <span class="keyword">super</span>.writeStartElement(prefix, local, uri);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amouchere.github.io/technical-debt/2015/04/03/insrer_du_cdata_dans_un_flux_soap/" data-id="cl6e4cwsq001fayowg7l3bg3w" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/JAX-WS/" rel="tag">JAX-WS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-soap_interceptor" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/technical-debt/2015/04/03/soap_interceptor/" class="article-date">
@@ -97,7 +138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amouchere.github.io/technical-debt/2015/04/03/soap_interceptor/" data-id="cl6e44pgx002gaon54wtkfd70" class="article-share-link">Partager</a>
+      <a data-url="https://amouchere.github.io/technical-debt/2015/04/03/soap_interceptor/" data-id="cl6e4cwtd002iayow36ou3fcg" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/JAX-WS/" rel="tag">JAX-WS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Spring/" rel="tag">Spring</a></li></ul>
@@ -137,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amouchere.github.io/technical-debt/2015/03/05/mockito_tips_argument_captor_rcuprer_les_arguments_passs_aux_mocks/" data-id="cl6e44pgk001paon52hm1cqn6" class="article-share-link">Partager</a>
+      <a data-url="https://amouchere.github.io/technical-debt/2015/03/05/mockito_tips_argument_captor_rcuprer_les_arguments_passs_aux_mocks/" data-id="cl6e4cwsy001rayowhrc81qho" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Mockito/" rel="tag">Mockito</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/TU/" rel="tag">TU</a></li></ul>
@@ -177,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amouchere.github.io/technical-debt/2015/03/05/spring_ws_soap_et_conduit_http_avec_ssl/" data-id="cl6e44pgy002iaon5dvgl6q4t" class="article-share-link">Partager</a>
+      <a data-url="https://amouchere.github.io/technical-debt/2015/03/05/spring_ws_soap_et_conduit_http_avec_ssl/" data-id="cl6e4cwte002layow9tmac1vc" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/JAX-WS/" rel="tag">JAX-WS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/SSL/" rel="tag">SSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Spring/" rel="tag">Spring</a></li></ul>
@@ -217,65 +258,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amouchere.github.io/technical-debt/2015/02/03/gcs_git_cheat_sheet/" data-id="cl6e44pgb0018aon597eu2dro" class="article-share-link">Partager</a>
+      <a data-url="https://amouchere.github.io/technical-debt/2015/02/03/gcs_git_cheat_sheet/" data-id="cl6e4cwsn0018ayowgnae00w5" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Git/" rel="tag">Git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ajouter_une_action_au_menu_contextuel_windows" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/technical-debt/2014/11/14/ajouter_une_action_au_menu_contextuel_windows/" class="article-date">
-  <time datetime="2014-11-14T00:00:00.000Z" itemprop="datePublished">2014-11-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/technical-debt/2014/11/14/ajouter_une_action_au_menu_contextuel_windows/">Ajouter une action au menu contextuel Windows</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Pour ajouter une action au menu contextuel, il va falloir toucher à la base de registre de Window.</p>
-<p><img src="./blog-regedit.png" alt="résultat"></p>
-<ul>
-<li>Ouvrir la base de registre. (regedit)</li>
-<li>Aller dans: HKEY_LOCAL_MACHINE &gt; software &gt; Classes &gt; folder &gt; shell</li>
-<li>Ajouter une clé nommée <maNouvelleAction>.(cmdHere dans l’exemple)</li>
-<li>Puis ajouter une sous-clé nommée “command”. (ne pas changer le nom de la sous-clé).</li>
-<li>Double cliquer sur la sous-clé puis renseigner la valeur adaptée.</li>
-</ul>
-<hr>
-<p>Exemples:</p>
-<p>Ici on veut ouvrir une fenêtre DOS et placer le prompt à l’emplacement du répertoire où on a cliquer droit.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd.exe &#x2F;k pushd &quot;%L&quot;</span><br></pre></td></tr></table></figure>
-
-
-<p>On peut aussi appeler un script (pour placer des variables d’environnement par exemple)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd.exe &#x2F;k pushd &quot;%L&quot; &amp; call I:\tools\bin\setup.bat</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://amouchere.github.io/technical-debt/2014/11/14/ajouter_une_action_au_menu_contextuel_windows/" data-id="cl6e44pfz000jaon5d7yk2yb7" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/technical-debt/tags/Windows/" rel="tag">Windows</a></li></ul>
 
     </footer>
   </div>
@@ -288,7 +274,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/technical-debt/page/8/">&lt;&lt; Précédent</a><a class="page-number" href="/technical-debt/">1</a><span class="space">&hellip;</span><a class="page-number" href="/technical-debt/page/7/">7</a><a class="page-number" href="/technical-debt/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/technical-debt/page/10/">10</a><a class="extend next" rel="next" href="/technical-debt/page/10/">Suivant &gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/technical-debt/page/8/">&lt;&lt; Précédent</a><a class="page-number" href="/technical-debt/">1</a><span class="space">&hellip;</span><a class="page-number" href="/technical-debt/page/7/">7</a><a class="page-number" href="/technical-debt/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/technical-debt/page/10/">10</a><a class="page-number" href="/technical-debt/page/11/">11</a><a class="extend next" rel="next" href="/technical-debt/page/10/">Suivant &gt;&gt;</a>
   </nav>
 
 </section>
@@ -312,7 +298,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/technical-debt/tags/Agilite/" style="font-size: 10px;">Agilité</a> <a href="/technical-debt/tags/AssertJ/" style="font-size: 10px;">AssertJ</a> <a href="/technical-debt/tags/Brackets/" style="font-size: 10px;">Brackets</a> <a href="/technical-debt/tags/Bricolage/" style="font-size: 10px;">Bricolage</a> <a href="/technical-debt/tags/CRON/" style="font-size: 10px;">CRON</a> <a href="/technical-debt/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/technical-debt/tags/CXF/" style="font-size: 11.43px;">CXF</a> <a href="/technical-debt/tags/Coldfusion/" style="font-size: 10px;">Coldfusion</a> <a href="/technical-debt/tags/DHT22/" style="font-size: 10px;">DHT22</a> <a href="/technical-debt/tags/DIY/" style="font-size: 11.43px;">DIY</a> <a href="/technical-debt/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/technical-debt/tags/ESP8266/" style="font-size: 10px;">ESP8266</a> <a href="/technical-debt/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/technical-debt/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/technical-debt/tags/Hacker/" style="font-size: 10px;">Hacker</a> <a href="/technical-debt/tags/Http/" style="font-size: 10px;">Http</a> <a href="/technical-debt/tags/JAX-WS/" style="font-size: 15.71px;">JAX-WS</a> <a href="/technical-debt/tags/Java/" style="font-size: 20px;">Java</a> <a href="/technical-debt/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/technical-debt/tags/Linux/" style="font-size: 18.57px;">Linux</a> <a href="/technical-debt/tags/Maven/" style="font-size: 12.86px;">Maven</a> <a href="/technical-debt/tags/Mockito/" style="font-size: 11.43px;">Mockito</a> <a href="/technical-debt/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/technical-debt/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/technical-debt/tags/RPM/" style="font-size: 11.43px;">RPM</a> <a href="/technical-debt/tags/SPRING/" style="font-size: 14.29px;">SPRING</a> <a href="/technical-debt/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/technical-debt/tags/SSH/" style="font-size: 11.43px;">SSH</a> <a href="/technical-debt/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/technical-debt/tags/Scrum/" style="font-size: 10px;">Scrum</a> <a href="/technical-debt/tags/Shell/" style="font-size: 14.29px;">Shell</a> <a href="/technical-debt/tags/Spring/" style="font-size: 17.14px;">Spring</a> <a href="/technical-debt/tags/Syno/" style="font-size: 10px;">Syno</a> <a href="/technical-debt/tags/TU/" style="font-size: 14.29px;">TU</a> <a href="/technical-debt/tags/TrueCrypt/" style="font-size: 10px;">TrueCrypt</a> <a href="/technical-debt/tags/Windows/" style="font-size: 14.29px;">Windows</a> <a href="/technical-debt/tags/arduino/" style="font-size: 10px;">arduino</a> <a href="/technical-debt/tags/java/" style="font-size: 10px;">java</a> <a href="/technical-debt/tags/javascript/" style="font-size: 10px;">javascript</a>
+      <a href="/technical-debt/tags/Agilite/" style="font-size: 10px;">Agilité</a> <a href="/technical-debt/tags/AssertJ/" style="font-size: 10px;">AssertJ</a> <a href="/technical-debt/tags/Brackets/" style="font-size: 10px;">Brackets</a> <a href="/technical-debt/tags/Bricolage/" style="font-size: 10px;">Bricolage</a> <a href="/technical-debt/tags/CRON/" style="font-size: 10px;">CRON</a> <a href="/technical-debt/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/technical-debt/tags/CXF/" style="font-size: 11.43px;">CXF</a> <a href="/technical-debt/tags/Coldfusion/" style="font-size: 10px;">Coldfusion</a> <a href="/technical-debt/tags/DHT22/" style="font-size: 10px;">DHT22</a> <a href="/technical-debt/tags/DIY/" style="font-size: 11.43px;">DIY</a> <a href="/technical-debt/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/technical-debt/tags/ESP8266/" style="font-size: 10px;">ESP8266</a> <a href="/technical-debt/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/technical-debt/tags/Git/" style="font-size: 15.71px;">Git</a> <a href="/technical-debt/tags/Hacker/" style="font-size: 10px;">Hacker</a> <a href="/technical-debt/tags/Http/" style="font-size: 10px;">Http</a> <a href="/technical-debt/tags/JAX-WS/" style="font-size: 15.71px;">JAX-WS</a> <a href="/technical-debt/tags/Java/" style="font-size: 20px;">Java</a> <a href="/technical-debt/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/technical-debt/tags/Linux/" style="font-size: 18.57px;">Linux</a> <a href="/technical-debt/tags/Maven/" style="font-size: 12.86px;">Maven</a> <a href="/technical-debt/tags/Mockito/" style="font-size: 11.43px;">Mockito</a> <a href="/technical-debt/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/technical-debt/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/technical-debt/tags/RPM/" style="font-size: 11.43px;">RPM</a> <a href="/technical-debt/tags/SPRING/" style="font-size: 14.29px;">SPRING</a> <a href="/technical-debt/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/technical-debt/tags/SSH/" style="font-size: 11.43px;">SSH</a> <a href="/technical-debt/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/technical-debt/tags/Scrum/" style="font-size: 10px;">Scrum</a> <a href="/technical-debt/tags/Shell/" style="font-size: 14.29px;">Shell</a> <a href="/technical-debt/tags/Spring/" style="font-size: 17.14px;">Spring</a> <a href="/technical-debt/tags/Syno/" style="font-size: 10px;">Syno</a> <a href="/technical-debt/tags/TU/" style="font-size: 14.29px;">TU</a> <a href="/technical-debt/tags/TrueCrypt/" style="font-size: 10px;">TrueCrypt</a> <a href="/technical-debt/tags/Windows/" style="font-size: 14.29px;">Windows</a> <a href="/technical-debt/tags/arduino/" style="font-size: 10px;">arduino</a> <a href="/technical-debt/tags/java/" style="font-size: 10px;">java</a> <a href="/technical-debt/tags/javascript/" style="font-size: 10px;">javascript</a>
     </div>
   </div>
 
@@ -321,7 +307,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2021/01/">janvier 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/12/">décembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/11/">novembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/12/">décembre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/10/">octobre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/06/">juin 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/02/">février 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/01/">janvier 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/09/">septembre 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/07/">juillet 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/05/">mai 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/02/">février 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/01/">janvier 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/12/">décembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/09/">septembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/08/">août 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/06/">juin 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/04/">avril 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/03/">mars 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/02/">février 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/01/">janvier 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/12/">décembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/09/">septembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/08/">août 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/05/">mai 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/04/">avril 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/03/">mars 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/02/">février 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/11/">novembre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/10/">octobre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/08/">août 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/01/">janvier 2014</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2022/08/">août 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2021/01/">janvier 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/12/">décembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2020/11/">novembre 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/12/">décembre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/10/">octobre 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/06/">juin 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/02/">février 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2018/01/">janvier 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/09/">septembre 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/07/">juillet 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/05/">mai 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/02/">février 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2017/01/">janvier 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/12/">décembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/09/">septembre 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/08/">août 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/06/">juin 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/04/">avril 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/03/">mars 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/02/">février 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2016/01/">janvier 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/12/">décembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/09/">septembre 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/08/">août 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/05/">mai 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/04/">avril 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/03/">mars 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2015/02/">février 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/11/">novembre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/10/">octobre 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/08/">août 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/technical-debt/archives/2014/01/">janvier 2014</a></li></ul>
     </div>
   </div>
 
@@ -332,6 +318,10 @@
     <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/technical-debt/2022/08/03/git_https_to_ssh/">GIT : HTTPS vers SSH</a>
+          </li>
         
           <li>
             <a href="/technical-debt/2021/01/08/I2C-Screen-sur-ESP8266/">I2C Screen sur ESP8266</a>
@@ -347,10 +337,6 @@
         
           <li>
             <a href="/technical-debt/2018/12/24/diskusage/">Disk Usage</a>
-          </li>
-        
-          <li>
-            <a href="/technical-debt/2018/10/24/ssh-via-rebond/">ssh via rebond</a>
           </li>
         
       </ul>
